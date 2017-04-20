@@ -7,7 +7,7 @@
 #include "allegro5/allegro_native_dialog.h" 
 
 const float FPS = 60;
-const int SCREEN_W = 1200;
+const int SCREEN_W = 1000;
 const int SCREEN_H = 600;
 const int BOUNCER_SIZE = 32;
 int b1(int b[100][100]);
@@ -131,25 +131,35 @@ int main(int argc, char **argv)
 
 
 
-
+	int g=0;
 
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
-	al_draw_filled_rectangle(0, 120, 110, 400, al_map_rgb(0, 0, 0));
+	
 	while (1)
 	{
 		cle = cle + 1;
 		if (cle == 10) {
 			cle = 0;
-			al_draw_filled_rectangle(0, 120, 110, 400, al_map_rgb(0, 0, 0));
+			
 			al_clear_to_color(al_map_rgb(0, 0, 0));
-			if (lev == 1) {
-				image = al_load_bitmap("startstepstopclean2.png");//Начало прорисовки меню 
+			
+			if (lev == 0) {
+				
+				image = al_load_bitmap("fon_menu.png");
+				
 				al_draw_bitmap(image, 0, 0, 0);
+				if (g == 1)
+				{
+					image = al_load_bitmap("menu_op.png");
 
-				image = al_load_bitmap("rules4.png");
-				al_draw_bitmap(image, 510, 80, 0);
-
+					al_draw_bitmap(image, 0, 0, 0);
+				}//Начало прорисовки меню 
+		
+			}
+			if (lev == 1) {
+				image = al_load_bitmap("play_fon.png");//Начало прорисовки меню 
+				al_draw_bitmap(image, 0, 0, 0);
 				image = al_load_bitmap("randomplanerrellay.png");
 				al_draw_bitmap(image, 10, 520, 0);
 			}
@@ -175,11 +185,11 @@ int main(int argc, char **argv)
 		}
 
 		if (lev == 1) {
-			al_draw_filled_ellipse(550, 550, 25, 25, al_map_rgb(255, 0, 2));
+		
 			if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 			{
 
-				if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 0 && bouncer_x < 125)) {
+				if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 180 && bouncer_x < 330)) {
 					f = 10;
 					for (j = 0; j < m; j++) {
 						for (i = 0; i < m; i++)
@@ -190,7 +200,7 @@ int main(int argc, char **argv)
 				}
 
 				else if
-					((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 125 && bouncer_x < 250)) {
+					((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 340 && bouncer_x < 490)) {
 					f = 1;
 					for (j = 0; j < m; j++) {
 						for (i = 0; i < m; i++)
@@ -201,7 +211,7 @@ int main(int argc, char **argv)
 
 				}
 				else if ((bouncer_y
-					> 0 && bouncer_y < 80) && (bouncer_x > 250 && bouncer_x < 375)) {
+					> 0 && bouncer_y < 80) && (bouncer_x > 500 && bouncer_x < 670)) {
 					f = 3;
 					for (j = 0; j < m; j++) {
 						for (i = 0; i < m; i++)
@@ -211,7 +221,7 @@ int main(int argc, char **argv)
 					}
 				}
 
-				else if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 375 && bouncer_x < 500)) {
+				else if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 680 && bouncer_x < 840)) {
 					for (j = 0; j < m; j++) {
 						for (i = 0; i < m; i++) {
 							b[i][j] = 0;
@@ -219,7 +229,7 @@ int main(int argc, char **argv)
 					}
 
 				}
-				else if ((bouncer_y > 525 && bouncer_y < 575) && (bouncer_x > 525 && bouncer_x < 575)) {
+				else if ((bouncer_y > 525 && bouncer_y < 600) && (bouncer_x > 800 && bouncer_x < 1000)) {
 					lev = 0;
 
 				}
@@ -260,10 +270,10 @@ int main(int argc, char **argv)
 				else {
 
 					for (y = 1; y < m; y++) {
-						if ((bouncer_y > 96 + 10 * y) && (bouncer_y < 104 + 10 * y))
+						if ((bouncer_y > 100- 160 / m + (400 / m) * y) && (bouncer_y < 100 + 160 / m + (400 / m) * y))
 							for (x = 1; x < m; x++)
 							{
-								if ((bouncer_x > 96 + 10 * x) && (bouncer_x < 104 + 10 * x)) {
+								if ((bouncer_x > 320 - 160 / m + (400 / m) * x) && (bouncer_x < 320 + 160 / m + (400 / m) * x)) {
 									if (b[x][y] == 1) {
 										b[x][y] = 0;
 										kol--;
@@ -290,17 +300,17 @@ int main(int argc, char **argv)
 				for (x = 1; x < m; x++)
 				{
 					if (b[x][y] == 1) {
-						al_draw_filled_ellipse(100 + 10 * x, 100 + 10 * y, 4, 4, al_map_rgb(0, 0, 255));
+						al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(0, 0, 255));
 						redraw = true;
 					}
 					else if (b[x][y] == 0) {
-						al_draw_filled_ellipse(100 + 10 * x, 100 + 10 * y, 4, 4, al_map_rgb(255, 255, 255));
+						al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(255, 255, 255));
 					}
 					else if (b[x][y] == 3) {
-						al_draw_filled_ellipse(100 + 10 * x, 100 + 10 * y, 4, 4, al_map_rgb(0, 255, 0));
+						al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400/m) * y, 160 / m, 160 / m, al_map_rgb(0, 255, 0));
 					}
 					else if (b[x][y] == 2) {
-						al_draw_filled_ellipse(100 + 10 * x, 100 + 10 * y, 4, 4, al_map_rgb(255, 0, 2));
+						al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(255, 0, 2));
 					}
 				}
 			}
@@ -321,17 +331,17 @@ int main(int argc, char **argv)
 					for (x = 1; x < m; x++)
 					{
 						if (b[x][y] == 1) {
-							al_draw_filled_ellipse(100 + 10 * x, 100 + 10 * y, 4, 4, al_map_rgb(0, 0, 255));
+							al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160/m, 160/m, al_map_rgb(0, 0, 255));
 							redraw = true;
 						}
 						else if (b[x][y] == 0) {
-							al_draw_filled_ellipse(100 + 10 * x, 100 + 10 * y, 4, 4, al_map_rgb(255, 255, 255));
+							al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(255, 255, 255));
 						}
 						else if (b[x][y] == 3) {
-							al_draw_filled_ellipse(100 + 10 * x, 100 + 10 * y, 4, 4, al_map_rgb(0, 255, 0));
+							al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(0, 255, 0));
 						}
 						else if (b[x][y] == 2) {
-							al_draw_filled_ellipse(100 + 10 * x, 100 + 10 * y, 4, 4, al_map_rgb(255, 0, 2));
+							al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(255, 0, 2));
 						}
 					}
 				}
@@ -370,7 +380,7 @@ int main(int argc, char **argv)
 
 					}
 				}
-				if (d > m*m - 80) { d = 0; f = 0; }
+				if (d > m*m - 2*m) { d = 0; f = 0; }
 
 
 				for (y = 1; y < m; y++) {
@@ -388,16 +398,16 @@ int main(int argc, char **argv)
 	if (lev == 0) {
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
-		
-		al_draw_filled_ellipse(350 , 350 , 25, 25, al_map_rgb(255, 0, 2));
-		al_draw_filled_ellipse(450, 200, 5, 5, al_map_rgb(255, 0, 2));
-		al_draw_filled_ellipse(450, 250, 5, 5, al_map_rgb(255, 0, 2));
-		al_draw_filled_ellipse(450, 300, 5, 5, al_map_rgb(255, 0, 2));
-		al_draw_filled_ellipse(450, 350, 5, 5, al_map_rgb(255, 0, 2));
-		if (m == 40) al_draw_filled_ellipse(450, 350, 5, 5, al_map_rgb(0, 255, 2));
-		if (m == 30) al_draw_filled_ellipse(450, 300, 5, 5, al_map_rgb(0, 255, 2));
-		if (m ==20) al_draw_filled_ellipse(450, 250, 5, 5, al_map_rgb(0, 255, 2));
-		if (m == 10) al_draw_filled_ellipse(450, 200, 5, 5, al_map_rgb(0, 255, 2));
+		if (g == 1) {
+			al_draw_filled_ellipse(650, 390, 5, 5, al_map_rgb(255, 0, 2));
+			al_draw_filled_ellipse(650, 420, 5, 5, al_map_rgb(255, 0, 2));
+			al_draw_filled_ellipse(650, 450, 5, 5, al_map_rgb(255, 0, 2));
+			al_draw_filled_ellipse(650, 480, 5, 5, al_map_rgb(255, 0, 2));
+		}
+		if (m == 40 && g == 1) al_draw_filled_ellipse(650, 480, 5, 5, al_map_rgb(0, 255, 2));
+		if (m == 30 && g == 1) al_draw_filled_ellipse(650, 450, 5, 5, al_map_rgb(0, 255, 2));
+		if (m ==20 && g == 1) al_draw_filled_ellipse(650, 420, 5, 5, al_map_rgb(0, 255, 2));
+		if (m == 10&&g == 1) al_draw_filled_ellipse(650, 390, 5, 5, al_map_rgb(0, 255, 2));
 		if (ev.type == ALLEGRO_EVENT_MOUSE_AXES ||
 			ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY) {
 
@@ -406,23 +416,29 @@ int main(int argc, char **argv)
 
 		} 
 		if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-			if ((bouncer_y > 325 && bouncer_y < 375) && (bouncer_x > 325 && bouncer_x < 375)) {
+			if ((bouncer_y > 350 && bouncer_y < 390) && (bouncer_x > 410 && bouncer_x < 600)) {
 			lev = 1;
+			g = 0;
 		}
-			else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 190 && bouncer_y < 210) && (bouncer_x > 440 && bouncer_x < 460)) {
+			
+				if ((bouncer_y >390 && bouncer_y < 480) && (bouncer_x > 410 && bouncer_x < 600)) {
+					if(g==0)g=1;
+					 else if (g == 1)g = 0;
+				}
+			if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 370 && bouncer_y < 405) && (bouncer_x > 640 && bouncer_x < 850)) {
 				m = 10;
 
 
 			}
-			else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 240 && bouncer_y < 260) && (bouncer_x > 440 && bouncer_x < 460)) {
+			else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 405 && bouncer_y < 435) && (bouncer_x > 640 && bouncer_x < 850)) {
 				m = 20;
 
 			}
-			else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 290 && bouncer_y < 310) && (bouncer_x > 440 && bouncer_x < 460)) {
+			else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 435 && bouncer_y < 465) && (bouncer_x > 640 && bouncer_x < 850)) {
 				m = 30;
 
 			}
-			else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 340 && bouncer_y < 360) && (bouncer_x > 440 && bouncer_x < 460)) {
+			else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 465 && bouncer_y < 495) && (bouncer_x > 640 && bouncer_x < 850)) {
 				m = 40;
 
 			}
