@@ -103,6 +103,8 @@ int main(int argc, char **argv)
 	al_init_font_addon(); // initialize the font addon 
 	al_init_ttf_addon();// initialize the ttf (True Type Font) addon 
 
+	ALLEGRO_FONT *font_goldana = al_load_font("Goldana.ttf", 45, 0);
+	ALLEGRO_FONT *font_pirulen = al_load_font("pirulen.ttf", 24, 0);
 
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
@@ -116,7 +118,7 @@ int main(int argc, char **argv)
 	int i, j, k, x, h, y = 1, n = 0, f = 0, t = 0;
 	int a[100][100], b[100][100];
 
-	int cle = 0;
+	int cle = 99;
 	int menu = 0, level = 4, lev = 0;
 	int kol = 0, kol_max = 300, c1 = 0;
 	int life = 0, deaf = 0;
@@ -131,35 +133,37 @@ int main(int argc, char **argv)
 
 
 
-	int g=0;
+	int g = 0;
 
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
-	
+
 	while (1)
 	{
 		cle = cle + 1;
 		if (cle == 100) {
 			cle = 0;
-			
-		
-			
+
+
+
 			if (lev == 0) {
-				
-				image = al_load_bitmap("fon_menu.png");
+
+				image = al_load_bitmap("fon_menu.jpg");
 				al_draw_bitmap(image, 0, 0, 0);
 				if (g == 1)
 				{
-					image = al_load_bitmap("menu_op.png");
+					image = al_load_bitmap("menu_op.jpg");
 					al_draw_bitmap(image, 0, 0, 0);
 				}//Начало прорисовки меню 
-		
+
 			}
 			if (lev == 1) {
-				image = al_load_bitmap("play_fon.png");//Начало прорисовки меню 
+				image = al_load_bitmap("play_fon.jpg");//Начало прорисовки меню 
 				al_draw_bitmap(image, 0, 0, 0);
-				image = al_load_bitmap("randomplanerrellay.png");
-				al_draw_bitmap(image, 10, 520, 0);
+				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 40, 500, 0, "Random");
+				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 180, 500, 0, "Planer");
+				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 320, 500, 0, "Rellay");
+				
 			}
 		}
 		//Конец прорисовки меню
@@ -182,8 +186,8 @@ int main(int argc, char **argv)
 
 		}
 
-		
-		
+
+
 		if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
 			if (lev == 1) {
@@ -229,7 +233,7 @@ int main(int argc, char **argv)
 				}
 				else if ((bouncer_y > 525 && bouncer_y < 600) && (bouncer_x > 800 && bouncer_x < 1000)) {
 					lev = 0;
-
+					cle = 99;
 				}
 				else if ((bouncer_y > 520 && bouncer_y < 550) && (bouncer_x > 10 && bouncer_x < 145)) {
 					srand((unsigned)time(NULL));
@@ -256,20 +260,26 @@ int main(int argc, char **argv)
 					lev = 1;
 					g = 0;
 					al_clear_to_color(al_map_rgb(0, 0, 0));
-					cle = 9;
+					cle = 99;
+					for (j = 0; j < m; j++) {
+						for (i = 0; i < m; i++) {
+							b[i][j] = 0;
+						}
+					}
+					
 				}
 
 				if ((bouncer_y > 390 && bouncer_y < 480) && (bouncer_x > 410 && bouncer_x < 600)) {
 					al_clear_to_color(al_map_rgb(0, 0, 0));
 					if (g == 0) {
 						g = 1;
-						
-						image = al_load_bitmap("menu_op.png");
+
+						image = al_load_bitmap("menu_op.jpg");
 						al_draw_bitmap(image, 0, 0, 0);
 					}
 					else if (g == 1) {
 						g = 0;
-						image = al_load_bitmap("fon_menu.png");
+						image = al_load_bitmap("fon_menu.jpg");
 						al_draw_bitmap(image, 0, 0, 0);
 					}
 				}
@@ -435,20 +445,20 @@ int main(int argc, char **argv)
 			}
 
 		}
-		
-	if (lev == 0) {
-		if (g == 1) {
-			al_draw_filled_ellipse(650, 390, 5, 5, al_map_rgb(255, 0, 2));
-			al_draw_filled_ellipse(650, 420, 5, 5, al_map_rgb(255, 0, 2));
-			al_draw_filled_ellipse(650, 450, 5, 5, al_map_rgb(255, 0, 2));
-			al_draw_filled_ellipse(650, 480, 5, 5, al_map_rgb(255, 0, 2));
+
+		if (lev == 0) {
+			if (g == 1) {
+				al_draw_filled_ellipse(650, 390, 5, 5, al_map_rgb(255, 0, 2));
+				al_draw_filled_ellipse(650, 420, 5, 5, al_map_rgb(255, 0, 2));
+				al_draw_filled_ellipse(650, 450, 5, 5, al_map_rgb(255, 0, 2));
+				al_draw_filled_ellipse(650, 480, 5, 5, al_map_rgb(255, 0, 2));
+			}
+			if (m == 40 && g == 1) al_draw_filled_ellipse(650, 480, 5, 5, al_map_rgb(0, 255, 2));
+			if (m == 30 && g == 1) al_draw_filled_ellipse(650, 450, 5, 5, al_map_rgb(0, 255, 2));
+			if (m == 20 && g == 1) al_draw_filled_ellipse(650, 420, 5, 5, al_map_rgb(0, 255, 2));
+			if (m == 10 && g == 1) al_draw_filled_ellipse(650, 390, 5, 5, al_map_rgb(0, 255, 2));
+			al_flip_display();
 		}
-		if (m == 40 && g == 1) al_draw_filled_ellipse(650, 480, 5, 5, al_map_rgb(0, 255, 2));
-		if (m == 30 && g == 1) al_draw_filled_ellipse(650, 450, 5, 5, al_map_rgb(0, 255, 2));
-		if (m ==20 && g == 1) al_draw_filled_ellipse(650, 420, 5, 5, al_map_rgb(0, 255, 2));
-		if (m == 10&&g == 1) al_draw_filled_ellipse(650, 390, 5, 5, al_map_rgb(0, 255, 2));
-		al_flip_display();
-	}
 		al_flip_display();
 
 	}
@@ -456,6 +466,8 @@ int main(int argc, char **argv)
 	al_destroy_timer(timer);
 	al_destroy_display(display);
 	al_destroy_event_queue(event_queue);
+	al_destroy_font(font_goldana);
+	al_destroy_font(font_pirulen);
 
 	return 0;
 }
