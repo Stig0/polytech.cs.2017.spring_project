@@ -103,8 +103,8 @@ int main(int argc, char **argv)
 	al_init_font_addon(); // initialize the font addon 
 	al_init_ttf_addon();// initialize the ttf (True Type Font) addon 
 
-	ALLEGRO_FONT *font_goldana = al_load_font("Goldana.ttf", 45, 0);
-	ALLEGRO_FONT *font_pirulen = al_load_font("pirulen.ttf", 24, 0);
+	ALLEGRO_FONT *font_goldana = al_load_font("res/Goldana.ttf", 45, 0);
+	ALLEGRO_FONT *font_pirulen = al_load_font("res/pirulen.ttf", 24, 0);
 
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
@@ -119,9 +119,9 @@ int main(int argc, char **argv)
 	int a[100][100], b[100][100];
 
 	int cle = 99;
-	int menu = 0, level = 4, lev = 0;
+	int lev = 0;
 	int kol = 0, kol_max = 300, c1 = 0;
-	int life = 0, deaf = 0;
+	int life = 0, dead = 0;
 	for (j = 0; j < m; j++) {
 		for (i = 0; i < m; i++) {
 			b[i][j] = 0;
@@ -140,101 +140,105 @@ int main(int argc, char **argv)
 
 	while (1)
 	{
-		cle = cle + 1;
-		if (cle == 100) {
-			cle = 0;
+		cle = cle + 1;                         //Процесс очистки экрана,
+		if (cle == 100) {                      //при котором все ненужные элементы удаляются ,
+			cle = 0;                           // а нужные прорисовываются снова   
 
 
 
-			if (lev == 0) {
-
-				image = al_load_bitmap("fon_menu.jpg");
-				al_draw_bitmap(image, 0, 0, 0);
+			if (lev == 0) {                                  //Прорисовка стартового окна     
+                                                                                    
+				image = al_load_bitmap("res/fon_menu.jpg"); //Загрузка фона для стартового окна 
+				al_draw_bitmap(image, 0, 0, 0);             //Прорисовка фона для стартового окна  
 				if (g == 1)
 				{
-					image = al_load_bitmap("menu_op.jpg");
-					al_draw_bitmap(image, 0, 0, 0);
-				}//РќР°С‡Р°Р»Рѕ РїСЂРѕСЂРёСЃРѕРІРєРё РјРµРЅСЋ 
+					image = al_load_bitmap("res/menu_op.jpg"); //Загрузка фона для стартового окна 
+					al_draw_bitmap(image, 0, 0, 0);           //Прорисовка фона для стартового окна  
+				}
 
 			}
-			if (lev == 1) {
-				image = al_load_bitmap("play_fon.jpg");//РќР°С‡Р°Р»Рѕ РїСЂРѕСЂРёСЃРѕРІРєРё РјРµРЅСЋ 
-				al_draw_bitmap(image, 0, 0, 0);
+			if (lev == 1) {                                      //Начало прорисовки интерфейса игрового процесса 
+				image = al_load_bitmap("res/play_fon.jpg"); //Загрузка фона 
+				al_draw_bitmap(image, 0, 0, 0);            //Прорисовка фона
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 40, 500, 0, "Random");
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 180, 500, 0, "Planer");
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 320, 500, 0, "Rellay");
-				
 			}
 		}
-		//РљРѕРЅРµС† РїСЂРѕСЂРёСЃРѕРІРєРё РјРµРЅСЋ
+		//Конец процесса прорисовки 
 
-
-		ALLEGRO_EVENT ev;
+		/*Далее программа обрабатывает входяшие команды от пользователя 
+		Для этого было создано событие EV
+		*/
+		ALLEGRO_EVENT ev;//Инициализация события 
 		al_wait_for_event(event_queue, &ev);
 
-		if (ev.type == ALLEGRO_EVENT_TIMER) {
+		if (ev.type == ALLEGRO_EVENT_TIMER) {   //Подключение таймера 
 			redraw = true;
 		}
-		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-			break;
+		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {  //Случай закрытия пользователем дисплея 
+			break;                                            
 		}
-		else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES ||
-			ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY) {
-
-			bouncer_x = ev.mouse.x;
+		else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES ||              //Получение координат мыши от пользователя 
+			ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY) {         //Координаты будут получены если мышь находится в игровом поле
+			bouncer_x = ev.mouse.x;                             
 			bouncer_y = ev.mouse.y;
 
 		}
 
+		/*Далее идет одна из самых важных частей кода-обработка полученных координат мыши .*/
 
-
-		if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
+		if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)   //Координаты обрабатываются при нажатии пользователем на экран        
 		{
-			if (lev == 1) {
+			if (lev == 1) {//Переменная lev отвечает за открытие определенного окна ,если lev=0 - стартовое ,lev=1 -игровое
+
+				/*Далее,деяствие,при нажатии на кнопку Start:
+				Переход в режим многократных действий
+				*/
 				if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 180 && bouncer_x < 330)) {
 					f = 10;
-					for (j = 0; j < m; j++) {
-						for (i = 0; i < m; i++)
-							if (b[i][j] > 2) {
-								b[i][j] = 0;
-							}
-					}
 				}
 
+				/*Далее,деяствие,при нажатии на кнопку Step:
+				Переход в режим однократного действия
+				*/
 				else if
 					((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 340 && bouncer_x < 490)) {
 					f = 1;
-					for (j = 0; j < m; j++) {
-						for (i = 0; i < m; i++)
-							if (b[i][j] > 2) {
-								b[i][j] = 0;
-							}
-					}
 
+
+
+					/*Далее,деяствие,при нажатии на кнопку Stop:
+					 Остановка игрового процесса
+						*/
 				}
 				else if ((bouncer_y
 					> 0 && bouncer_y < 80) && (bouncer_x > 500 && bouncer_x < 670)) {
 					f = 3;
-					for (j = 0; j < m; j++) {
-						for (i = 0; i < m; i++)
-							if (b[i][j] > 2) {
-								b[i][j] = 0;
-							}
-					}
 				}
-
+				/*Далее,деяствие,при нажатии на кнопку Clear:
+				Обнуление матрицы b
+				*/
 				else if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 680 && bouncer_x < 840)) {
 					for (j = 0; j < m; j++) {
 						for (i = 0; i < m; i++) {
 							b[i][j] = 0;
+
 						}
 					}
 
 				}
+				/*Далее,деяствие,при нажатии на кнопку Menu:
+				Открытие стартового окна
+				*/
 				else if ((bouncer_y > 525 && bouncer_y < 600) && (bouncer_x > 800 && bouncer_x < 1000)) {
 					lev = 0;
 					cle = 99;
 				}
+
+				/*Далее,деяствие,при нажатии на кнопку Random :
+				Каждой ячейче матрицы b присваивается рандомное значение 0 или 1
+				*/
 				else if ((bouncer_y > 520 && bouncer_y < 550) && (bouncer_x > 10 && bouncer_x < 145)) {
 					srand((unsigned)time(NULL));
 					for (j = 1; j < m; j++) {
@@ -246,6 +250,9 @@ int main(int argc, char **argv)
 						}
 					}
 				}
+				/*Далее,деяствие,при нажатии на кнопку  :
+				Пtрвоначальная очиства матрицы b ,далее выполнение функции b1,которая присваивает матрице b нужные значения
+				*/
 				else if ((bouncer_y > 520 && bouncer_y < 550) && (bouncer_x > 147 && bouncer_x < 279)) {
 					for (j = 0; j < m; j++) {
 						for (i = 0; i < m; i++) {
@@ -254,54 +261,10 @@ int main(int argc, char **argv)
 					}
 					b1(b);
 				}
-			}
-			if (lev == 0) {
-				if ((bouncer_y > 350 && bouncer_y < 390) && (bouncer_x > 410 && bouncer_x < 600)) {
-					lev = 1;
-					g = 0;
-					al_clear_to_color(al_map_rgb(0, 0, 0));
-					cle = 99;
-					for (j = 0; j < m; j++) {
-						for (i = 0; i < m; i++) {
-							b[i][j] = 0;
-						}
-					}
-					
-				}
+				/*Далее,деяствие,при нажатии на кнопку  :
+				Пtрвоначальная очиства матрицы b ,далее выполнение функции b2,которая присваивает матрице b нужные значения
+				*/
 
-				if ((bouncer_y > 390 && bouncer_y < 480) && (bouncer_x > 410 && bouncer_x < 600)) {
-					al_clear_to_color(al_map_rgb(0, 0, 0));
-					if (g == 0) {
-						g = 1;
-
-						image = al_load_bitmap("menu_op.jpg");
-						al_draw_bitmap(image, 0, 0, 0);
-					}
-					else if (g == 1) {
-						g = 0;
-						image = al_load_bitmap("fon_menu.jpg");
-						al_draw_bitmap(image, 0, 0, 0);
-					}
-				}
-				if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 370 && bouncer_y < 405) && (bouncer_x > 640 && bouncer_x < 850)) {
-					m = 10;
-
-
-				}
-				else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 405 && bouncer_y < 435) && (bouncer_x > 640 && bouncer_x < 850)) {
-					m = 20;
-
-				}
-				else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 435 && bouncer_y < 465) && (bouncer_x > 640 && bouncer_x < 850)) {
-					m = 30;
-
-				}
-				else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 465 && bouncer_y < 495) && (bouncer_x > 640 && bouncer_x < 850)) {
-					m = 40;
-
-				}
-			}
-			if (lev == 1) {
 				if ((bouncer_y > 520 && bouncer_y < 550) && (bouncer_x > 280 && bouncer_x < 420)) {
 					for (j = 0; j < m; j++) {
 						for (i = 0; i < m; i++) {
@@ -314,7 +277,12 @@ int main(int argc, char **argv)
 
 				}
 
-
+				/*
+				Далее идет просерка попадания пользователем в игровые ячейки ,если координаты мыши удовлетворяют
+				определенным условиям-пользователь попадает в игровую ячейку,связанную с матрицей b ТО:
+				если элемент b был равен 0 ,то он становится равным 1
+				если элемент b был равен 1 ,то он становится равным 0
+				*/
 
 
 				else {
@@ -333,15 +301,67 @@ int main(int argc, char **argv)
 										b[x][y] = 1;
 										kol++;
 									}
-									else if ((b[x][y] == 3) && kol < kol_max) {
-										b[x][y] = 1;
-										kol++;
 
-									}
 								}
 
 							}
 					}
+				}
+			}
+		/*
+		Описание обработки результатов в режиме стартового окна  */
+			if (lev == 0) {
+				if ((bouncer_y > 350 && bouncer_y < 390) && (bouncer_x > 410 && bouncer_x < 600)) {//Описание нажатия кнопки Играть  
+					lev = 1;
+					g = 0;
+					al_clear_to_color(al_map_rgb(0, 0, 0));
+					cle = 99;
+					for (j = 0; j < m; j++) {
+						for (i = 0; i < m; i++) {
+							b[i][j] = 0;
+						}
+					}
+
+				}
+				if ((bouncer_y > 450 && bouncer_y < 480) && (bouncer_x > 450 && bouncer_x < 550)) {//Описание нажатия кнопки Выход
+
+					break;
+				}
+				if ((bouncer_y > 390 && bouncer_y < 430) && (bouncer_x > 420 && bouncer_x < 600)) {//Описание нажатия кнопки Настройки 
+
+					al_clear_to_color(al_map_rgb(0, 0, 0));
+					if (g == 0) {
+						g = 1;
+
+						image = al_load_bitmap("res/menu_op.jpg");
+						al_draw_bitmap(image, 0, 0, 0);
+					}
+					else if (g == 1) {
+						g = 0;
+						image = al_load_bitmap("res/fon_menu.jpg");
+						al_draw_bitmap(image, 0, 0, 0);
+					}
+				}
+			}
+			/*
+			Действия ,при выборе размера поля (Переменная m отвечает за размер поля  */
+			if (g == 1) {
+				if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 370 && bouncer_y < 405) && (bouncer_x > 640 && bouncer_x < 850)) {
+					m = 10;
+
+
+				}
+				else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 405 && bouncer_y < 435) && (bouncer_x > 640 && bouncer_x < 850)) {
+					m = 20;
+
+				}
+				else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 435 && bouncer_y < 465) && (bouncer_x > 640 && bouncer_x < 850)) {
+					m = 30;
+
+				}
+				else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 465 && bouncer_y < 495) && (bouncer_x > 640 && bouncer_x < 850)) {
+					m = 40;
+
 				}
 			}
 		}
@@ -356,12 +376,6 @@ int main(int argc, char **argv)
 					}
 					else if (b[x][y] == 0) {
 						al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(255, 255, 255));
-					}
-					else if (b[x][y] == 3) {
-						al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(0, 255, 0));
-					}
-					else if (b[x][y] == 2) {
-						al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(255, 0, 2));
 					}
 				}
 			}
@@ -388,12 +402,7 @@ int main(int argc, char **argv)
 						else if (b[x][y] == 0) {
 							al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(255, 255, 255));
 						}
-						else if (b[x][y] == 3) {
-							al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(0, 255, 0));
-						}
-						else if (b[x][y] == 2) {
-							al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(255, 0, 2));
-						}
+
 					}
 				}
 				for (j = 1; j < m; j++) {
@@ -408,19 +417,19 @@ int main(int argc, char **argv)
 						if (b[i + 1][j + 1] == 1) k++;
 						if (b[i][j] == 1)
 						{
-							if ((k == 2) || (k == 3)) a[i][j] = 1;
-							else a[i][j] = 0;
+							if ((k == 2) || (k == 3))a[i][j] = 1;
+							else { a[i][j] = 0; 
+							dead++;
+							}
 						}
 						if (b[i][j] == 0) {
-							if ((k == 3)) a[i][j] = 1;
+							if ((k == 3)) { a[i][j] = 1; 
+							life++;
+							}
 							else a[i][j] = 0;
 						}
-						if (b[i][j] == 2) {
-							if ((k == 3)) a[i][j] = 1;
-							else if (b[i][j] == 0) a[i][j] = 0;
-							else a[i][j] = 2;
-						}
 						k = 0;
+					
 					}
 				}
 				int d = 0;
