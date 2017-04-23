@@ -100,7 +100,7 @@ int main(int argc, char **argv)
 	al_register_event_source(event_queue, al_get_mouse_event_source());
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
 
-	al_init_font_addon(); // initialize the font addon 
+	al_init_font_addon(); // initialize the font 
 	al_init_ttf_addon();// initialize the ttf (True Type Font) addon 
 
 	ALLEGRO_FONT *font_goldana = al_load_font("res/Goldana.ttf", 45, 0);
