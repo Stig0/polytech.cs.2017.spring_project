@@ -163,6 +163,10 @@ int main(int argc, char **argv)
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 150, 500, 0, "Planer");
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 290, 500, 0, "Rellay");
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 430, 500, 0, "Twin Bees");
+				al_draw_rectangle(5, 500, 130, 545, al_map_rgb(255, 0, 0), 0);
+				al_draw_rectangle(145, 500, 260, 545, al_map_rgb(255, 0, 0), 0);
+				al_draw_rectangle(285, 500, 395, 545, al_map_rgb(255, 0, 0), 0);
+				al_draw_rectangle(425, 500, 580, 545, al_map_rgb(255, 0, 0), 0);
 			}
 		}
 		//Конец процесса прорисовки
