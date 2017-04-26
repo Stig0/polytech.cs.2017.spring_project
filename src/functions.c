@@ -1,4 +1,4 @@
-int planer(int b[20][20])
+int planer(int b[100][100])
 {
 	b[2][1] = 1;
 	b[3][2] = 1;
@@ -6,10 +6,10 @@ int planer(int b[20][20])
 	b[2][3] = 1;
 	b[3][3] = 1;
 
-	return b[20][20];
+	return b[100][100];
 }
 
-int rellay(int b[20][20])
+int rellay(int b[100][100])
 {
 	b[5][9] = 1;
 	b[6][9] = 1;
@@ -54,13 +54,13 @@ int rellay(int b[20][20])
 	b[12][12] = 1;
 	b[13][13] = 1;
 
-	return b[20][20];
+	return b[100][100];
 }
 
 
 
 
-int Twin_Bees(int b[20][20])
+int Twin_Bees(int b[100][100])
 {
 	b[7][12] = 1;
 	b[8][12] = 1;
@@ -112,5 +112,5 @@ int Twin_Bees(int b[20][20])
 	b[35][13] = 1;
 
 
-	return b[20][20];
+	return b[100][100];
 }

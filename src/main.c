@@ -13,7 +13,7 @@ const int BOUNCER_SIZE = 32;
 int planer(int b[100][100]);
 int rellay(int  b[100][100]);
 int Twin_Bees(int b[100][100]);
-
+int clear(int b[100][100]);
 int m = 40;
 int main(int argc, char **argv)
 {
@@ -224,12 +224,7 @@ int main(int argc, char **argv)
 				Обнуление матрицы b
 				*/
 				else if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 680 && bouncer_x < 840)) {
-					for (j = 0; j < m; j++) {
-						for (i = 0; i < m; i++) {
-							b[i][j] = 0;
-
-						}
-					}
+					clear(b);
 
 				}
 				/*Далее,деяствие,при нажатии на кнопку Menu:
@@ -258,11 +253,7 @@ int main(int argc, char **argv)
 				Пtрвоначальная очиства матрицы b ,далее выполнение функции b1,которая присваивает матрице b нужные значения
 				*/
 				else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 155 && bouncer_x < 260)) {
-					for (j = 0; j < m; j++) {
-						for (i = 0; i < m; i++) {
-							b[i][j] = 0;
-						}
-					}
+					clear(b);
 					planer(b);
 				}
 				/*Далее,деяствие,при нажатии на кнопку Rellay :
@@ -270,11 +261,7 @@ int main(int argc, char **argv)
 				*/
 
 				else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 290 && bouncer_x <380)) {
-					for (j = 0; j < m; j++) {
-						for (i = 0; i < m; i++) {
-							b[i][j] = 0;
-						}
-					}
+					clear(b);
 
 					rellay(b);
 
@@ -283,11 +270,7 @@ int main(int argc, char **argv)
 
 				//Кнопка "Twin Bees":
 				else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 430 && bouncer_x < 570)) {
-					for (j = 0; j < m; j++) {
-						for (i = 0; i < m; i++) {
-							b[i][j] = 0;
-						}
-					}
+					clear(b);
 					Twin_Bees(b);
 				}
 				/*
@@ -329,11 +312,7 @@ int main(int argc, char **argv)
 					g = 0;
 					al_clear_to_color(al_map_rgb(0, 0, 0));
 					cle = 99;
-					for (j = 0; j < m; j++) {
-						for (i = 0; i < m; i++) {
-							b[i][j] = 0;
-						}
-					}
+					clear(b);
 
 				}
 				if ((bouncer_y > 450 && bouncer_y < 480) && (bouncer_x > 450 && bouncer_x < 550)) {//Описание нажатия кнопки Выход
@@ -493,5 +472,10 @@ int main(int argc, char **argv)
 	al_destroy_font(font_goldana);
 	al_destroy_font(font_pirulen);
 
+	return 0;
+}
+
+int clean(int b[40][40])
+{
 	return 0;
 }
