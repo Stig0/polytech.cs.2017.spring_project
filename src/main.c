@@ -475,7 +475,3 @@ int main(int argc, char **argv)
 	return 0;
 }
 
-int clean(int b[40][40])
-{
-	return 0;
-}
