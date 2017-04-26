@@ -1,20 +1,19 @@
-#include <stdio.h> 
-#include <allegro5/allegro.h> 
-#include <allegro5/allegro_primitives.h> 
-#include <allegro5/allegro_font.h> 
-#include <allegro5/allegro_ttf.h> 
-#include <allegro5/allegro_image.h> 
-#include "allegro5/allegro_native_dialog.h" 
+#include <stdio.h>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_image.h>
+#include "allegro5/allegro_native_dialog.h"
 
 const float FPS = 60;
 const int SCREEN_W = 1000;
 const int SCREEN_H = 600;
 const int BOUNCER_SIZE = 32;
-int b1(int b[100][100]);
-int b2(int  b[100][100]);
-int b3(int  b[100][100]);
-int b4(int  b[100][100]);
-int l1(int  b[100][100]);
+int planer(int b[100][100]);
+int rellay(int  b[100][100]);
+int Twin_Bees(int b[100][100]);
+
 int m = 40;
 int main(int argc, char **argv)
 {
@@ -100,8 +99,8 @@ int main(int argc, char **argv)
 	al_register_event_source(event_queue, al_get_mouse_event_source());
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
 
-	al_init_font_addon(); // initialize the font addon 
-	al_init_ttf_addon();// initialize the ttf (True Type Font) addon 
+	al_init_font_addon(); // initialize the font addon
+	al_init_ttf_addon();// initialize the ttf (True Type Font) addon
 
 	ALLEGRO_FONT *font_goldana = al_load_font("res/Goldana.ttf", 45, 0);
 	ALLEGRO_FONT *font_pirulen = al_load_font("res/pirulen.ttf", 24, 0);
@@ -142,59 +141,60 @@ int main(int argc, char **argv)
 	{
 		cle = cle + 1;                         //Процесс очистки экрана,
 		if (cle == 100) {                      //при котором все ненужные элементы удаляются ,
-			cle = 0;                           // а нужные прорисовываются снова   
+			cle = 0;                           // а нужные прорисовываются снова
 
 
 
-			if (lev == 0) {                                  //Прорисовка стартового окна     
-                                                                                    
-				image = al_load_bitmap("res/fon_menu.jpg"); //Загрузка фона для стартового окна 
-				al_draw_bitmap(image, 0, 0, 0);             //Прорисовка фона для стартового окна  
+			if (lev == 0) {                                  //Прорисовка стартового окна
+
+				image = al_load_bitmap("res/fon_menu.jpg"); //Загрузка фона для стартового окна
+				al_draw_bitmap(image, 0, 0, 0);             //Прорисовка фона для стартового окна
 				if (g == 1)
 				{
-					image = al_load_bitmap("res/menu_op.jpg"); //Загрузка фона для стартового окна 
-					al_draw_bitmap(image, 0, 0, 0);           //Прорисовка фона для стартового окна  
+					image = al_load_bitmap("res/menu_op.jpg"); //Загрузка фона для стартового окна
+					al_draw_bitmap(image, 0, 0, 0);           //Прорисовка фона для стартового окна
 				}
 
 			}
-			if (lev == 1) {                                      //Начало прорисовки интерфейса игрового процесса 
-				image = al_load_bitmap("res/play_fon.jpg"); //Загрузка фона 
+			if (lev == 1) {                                      //Начало прорисовки интерфейса игрового процесса
+				image = al_load_bitmap("res/play_fon.jpg"); //Загрузка фона
 				al_draw_bitmap(image, 0, 0, 0);            //Прорисовка фона
-				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 40, 500, 0, "Random");
-				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 180, 500, 0, "Planer");
-				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 320, 500, 0, "Rellay");
+				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 10, 500, 0, "Random");
+				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 150, 500, 0, "Planer");
+				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 290, 500, 0, "Rellay");
+				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 430, 500, 0, "Twin Bees");
 			}
 		}
-		//Конец процесса прорисовки 
+		//Конец процесса прорисовки
 
-		/*Далее программа обрабатывает входяшие команды от пользователя 
+		/*Далее программа обрабатывает входяшие команды от пользователя
 		Для этого было создано событие EV
 		*/
-		ALLEGRO_EVENT ev;//Инициализация события 
+		ALLEGRO_EVENT ev;//Инициализация события
 		al_wait_for_event(event_queue, &ev);
 
-		if (ev.type == ALLEGRO_EVENT_TIMER) {   //Подключение таймера 
+		if (ev.type == ALLEGRO_EVENT_TIMER) {   //Подключение таймера
 			redraw = true;
 		}
-		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {  //Случай закрытия пользователем дисплея 
-			break;                                            
+		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {  //Случай закрытия пользователем дисплея
+			break;
 		}
-		else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES ||              //Получение координат мыши от пользователя 
+		else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES ||              //Получение координат мыши от пользователя
 			ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY) {         //Координаты будут получены если мышь находится в игровом поле
-			bouncer_x = ev.mouse.x;                             
+			bouncer_x = ev.mouse.x;
 			bouncer_y = ev.mouse.y;
 
 		}
 
 		/*Далее идет одна из самых важных частей кода-обработка полученных координат мыши .*/
 
-		if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)   //Координаты обрабатываются при нажатии пользователем на экран        
+		if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)   //Координаты обрабатываются при нажатии пользователем на экран
 		{
 			if (lev == 1) {//Переменная lev отвечает за открытие определенного окна ,если lev=0 - стартовое ,lev=1 -игровое
 
-				/*Далее,деяствие,при нажатии на кнопку Start:
-				Переход в режим многократных действий
-				*/
+						   /*Далее,деяствие,при нажатии на кнопку Start:
+						   Переход в режим многократных действий
+						   */
 				if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 180 && bouncer_x < 330)) {
 					f = 10;
 				}
@@ -209,8 +209,8 @@ int main(int argc, char **argv)
 
 
 					/*Далее,деяствие,при нажатии на кнопку Stop:
-					 Остановка игрового процесса
-						*/
+					Остановка игрового процесса
+					*/
 				}
 				else if ((bouncer_y
 					> 0 && bouncer_y < 80) && (bouncer_x > 500 && bouncer_x < 670)) {
@@ -239,7 +239,7 @@ int main(int argc, char **argv)
 				/*Далее,деяствие,при нажатии на кнопку Random :
 				Каждой ячейче матрицы b присваивается рандомное значение 0 или 1
 				*/
-				else if ((bouncer_y > 520 && bouncer_y < 550) && (bouncer_x > 10 && bouncer_x < 145)) {
+				else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 10 && bouncer_x < 120)) {
 					srand((unsigned)time(NULL));
 					for (j = 1; j < m; j++) {
 
@@ -250,33 +250,42 @@ int main(int argc, char **argv)
 						}
 					}
 				}
-				/*Далее,деяствие,при нажатии на кнопку  :
+				/*Далее,деяствие,при нажатии на кнопку Planer :
 				Пtрвоначальная очиства матрицы b ,далее выполнение функции b1,которая присваивает матрице b нужные значения
 				*/
-				else if ((bouncer_y > 520 && bouncer_y < 550) && (bouncer_x > 147 && bouncer_x < 279)) {
+				else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 155 && bouncer_x < 260)) {
 					for (j = 0; j < m; j++) {
 						for (i = 0; i < m; i++) {
 							b[i][j] = 0;
 						}
 					}
-					b1(b);
+					planer(b);
 				}
-				/*Далее,деяствие,при нажатии на кнопку  :
+				/*Далее,деяствие,при нажатии на кнопку Rellay :
 				Пtрвоначальная очиства матрицы b ,далее выполнение функции b2,которая присваивает матрице b нужные значения
 				*/
 
-				if ((bouncer_y > 520 && bouncer_y < 550) && (bouncer_x > 280 && bouncer_x < 420)) {
+				else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 290 && bouncer_x <380)) {
 					for (j = 0; j < m; j++) {
 						for (i = 0; i < m; i++) {
 							b[i][j] = 0;
 						}
 					}
 
-					b2(b);
+					rellay(b);
 
 
 				}
 
+				//Кнопка "Twin Bees":
+				else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 430 && bouncer_x < 570)) {
+					for (j = 0; j < m; j++) {
+						for (i = 0; i < m; i++) {
+							b[i][j] = 0;
+						}
+					}
+					Twin_Bees(b);
+				}
 				/*
 				Далее идет просерка попадания пользователем в игровые ячейки ,если координаты мыши удовлетворяют
 				определенным условиям-пользователь попадает в игровую ячейку,связанную с матрицей b ТО:
@@ -308,10 +317,10 @@ int main(int argc, char **argv)
 					}
 				}
 			}
-		/*
-		Описание обработки результатов в режиме стартового окна  */
+			/*
+			Описание обработки результатов в режиме стартового окна  */
 			if (lev == 0) {
-				if ((bouncer_y > 350 && bouncer_y < 390) && (bouncer_x > 410 && bouncer_x < 600)) {//Описание нажатия кнопки Играть  
+				if ((bouncer_y > 350 && bouncer_y < 390) && (bouncer_x > 410 && bouncer_x < 600)) {//Описание нажатия кнопки Играть
 					lev = 1;
 					g = 0;
 					al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -327,7 +336,7 @@ int main(int argc, char **argv)
 
 					break;
 				}
-				if ((bouncer_y > 390 && bouncer_y < 430) && (bouncer_x > 420 && bouncer_x < 600)) {//Описание нажатия кнопки Настройки 
+				if ((bouncer_y > 390 && bouncer_y < 430) && (bouncer_x > 420 && bouncer_x < 600)) {//Описание нажатия кнопки Настройки
 
 					al_clear_to_color(al_map_rgb(0, 0, 0));
 					if (g == 0) {
@@ -418,18 +427,20 @@ int main(int argc, char **argv)
 						if (b[i][j] == 1)
 						{
 							if ((k == 2) || (k == 3))a[i][j] = 1;
-							else { a[i][j] = 0; 
-							dead++;
+							else {
+								a[i][j] = 0;
+								dead++;
 							}
 						}
 						if (b[i][j] == 0) {
-							if ((k == 3)) { a[i][j] = 1; 
-							life++;
+							if ((k == 3)) {
+								a[i][j] = 1;
+								life++;
 							}
 							else a[i][j] = 0;
 						}
 						k = 0;
-					
+
 					}
 				}
 				int d = 0;
