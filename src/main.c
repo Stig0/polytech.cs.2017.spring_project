@@ -14,8 +14,12 @@ int planer(int b[100][100]);
 int rellay(int  b[100][100]);
 int Twin_Bees(int b[100][100]);
 int clear(int b[100][100]);
-int m = 40;
+int size_of_matrix = 40;
+ int game_mode = 0;
+ float bouncer_x = 0.0;
+ float bouncer_y = 0.0;
 int main(int argc, char **argv)
+
 {
 	ALLEGRO_DISPLAY_MODE *al_get_display_mode(int index, ALLEGRO_DISPLAY_MODE *mode);
 	ALLEGRO_DISPLAY *display = NULL;
@@ -23,8 +27,7 @@ int main(int argc, char **argv)
 	ALLEGRO_TIMER *timer = NULL;
 	ALLEGRO_BITMAP *bouncer = NULL;
 	ALLEGRO_BITMAP *image = NULL;
-	float bouncer_x = SCREEN_W / 2.0 - BOUNCER_SIZE / 2.0;
-	float bouncer_y = SCREEN_H / 2.0 - BOUNCER_SIZE / 2.0;
+	
 	int imageWidth = 0;
 	int imageHeight = 0;
 	bool redraw = true;
@@ -114,18 +117,15 @@ int main(int argc, char **argv)
 	al_flip_display();
 
 	al_start_timer(timer);
-	int i, j, k, x, h, y = 1, n = 0, f = 0, t = 0;
+	int i, j, k, x, h, y = 1, n = 0, t = 0;
 	int a[100][100], b[100][100];
-
-	int cle = 99;
-	int lev = 0;
+	int game_mode = 0;
+	int count_of_clean = 99;
+	int game_window = 0;
 	int kol = 0, kol_max = 300, c1 = 0;
 	int life = 0, dead = 0;
-	for (j = 0; j < m; j++) {
-		for (i = 0; i < m; i++) {
-			b[i][j] = 0;
-		}
-	}
+	clear(b);
+
 
 
 
@@ -139,13 +139,13 @@ int main(int argc, char **argv)
 
 	while (1)
 	{
-		cle = cle + 1;                         //Процесс очистки экрана,
-		if (cle == 100) {                      //при котором все ненужные элементы удаляются ,
-			cle = 0;                           // а нужные прорисовываются снова
+		count_of_clean++;                         //Процесс очистки экрана,
+		if (count_of_clean == 100) {                      //при котором все ненужные элементы удаляются ,
+			count_of_clean = 0;                           // а нужные прорисовываются снова
 
 
 
-			if (lev == 0) {                                  //Прорисовка стартового окна
+			if (game_window == 0) {                                  //Прорисовка стартового окна
 
 				image = al_load_bitmap("res/fon_menu.jpg"); //Загрузка фона для стартового окна
 				al_draw_bitmap(image, 0, 0, 0);             //Прорисовка фона для стартового окна
@@ -156,7 +156,7 @@ int main(int argc, char **argv)
 				}
 
 			}
-			if (lev == 1) {                                      //Начало прорисовки интерфейса игрового процесса
+			if (game_window == 1) {                                      //Начало прорисовки интерфейса игрового процесса
 				image = al_load_bitmap("res/play_fon.jpg"); //Загрузка фона
 				al_draw_bitmap(image, 0, 0, 0);            //Прорисовка фона
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 10, 500, 0, "Random");
@@ -194,31 +194,31 @@ int main(int argc, char **argv)
 
 		if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)   //Координаты обрабатываются при нажатии пользователем на экран
 		{
-			if (lev == 1) {//Переменная lev отвечает за открытие определенного окна ,если lev=0 - стартовое ,lev=1 -игровое
+			if (game_window == 1) {//Переменная game_window отвечает за открытие определенного окна ,если game_window=0 - стартовое ,game_window=1 -игровое
 
 						   /*Далее,деяствие,при нажатии на кнопку Start:
 						   Переход в режим многократных действий
 						   */
+				
 				if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 180 && bouncer_x < 330)) {
-					f = 10;
+					game_mode = 10;
 				}
 
 				/*Далее,деяствие,при нажатии на кнопку Step:
 				Переход в режим однократного действия
 				*/
-				else if
-					((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 340 && bouncer_x < 490)) {
-					f = 1;
-
+			
+				else if (((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 340 && bouncer_x < 490))) {
+					game_mode = 1;
+				}
 
 
 					/*Далее,деяствие,при нажатии на кнопку Stop:
 					Остановка игрового процесса
 					*/
-				}
 				else if ((bouncer_y
 					> 0 && bouncer_y < 80) && (bouncer_x > 500 && bouncer_x < 670)) {
-					f = 3;
+					game_mode = 3;
 				}
 				/*Далее,деяствие,при нажатии на кнопку Clear:
 				Обнуление матрицы b
@@ -231,8 +231,8 @@ int main(int argc, char **argv)
 				Открытие стартового окна
 				*/
 				else if ((bouncer_y > 525 && bouncer_y < 600) && (bouncer_x > 800 && bouncer_x < 1000)) {
-					lev = 0;
-					cle = 99;
+					game_window = 0;
+					count_of_clean = 99;
 				}
 
 				/*Далее,деяствие,при нажатии на кнопку Random :
@@ -240,9 +240,9 @@ int main(int argc, char **argv)
 				*/
 				else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 10 && bouncer_x < 120)) {
 					srand((unsigned)time(NULL));
-					for (j = 1; j < m; j++) {
+					for (j = 1; j < size_of_matrix; j++) {
 
-						for (i = 1; i < m; i++) {
+						for (i = 1; i < size_of_matrix; i++) {
 
 							t = rand() % 2;
 							b[i][j] = t;
@@ -283,11 +283,11 @@ int main(int argc, char **argv)
 
 				else {
 
-					for (y = 1; y < m; y++) {
-						if ((bouncer_y > 100 - 160 / m + (400 / m) * y) && (bouncer_y < 100 + 160 / m + (400 / m) * y))
-							for (x = 1; x < m; x++)
+					for (y = 1; y < size_of_matrix; y++) {
+						if ((bouncer_y > 100 - 160 / size_of_matrix + (400 / size_of_matrix) * y) && (bouncer_y < 100 + 160 / size_of_matrix + (400 / size_of_matrix) * y))
+							for (x = 1; x < size_of_matrix; x++)
 							{
-								if ((bouncer_x > 320 - 160 / m + (400 / m) * x) && (bouncer_x < 320 + 160 / m + (400 / m) * x)) {
+								if ((bouncer_x > 320 - 160 / size_of_matrix + (400 / size_of_matrix) * x) && (bouncer_x < 320 + 160 / size_of_matrix + (400 / size_of_matrix) * x)) {
 									if (b[x][y] == 1) {
 										b[x][y] = 0;
 										kol--;
@@ -306,12 +306,12 @@ int main(int argc, char **argv)
 			}
 			/*
 			Описание обработки результатов в режиме стартового окна  */
-			if (lev == 0) {
+			if (game_window == 0) {
 				if ((bouncer_y > 350 && bouncer_y < 390) && (bouncer_x > 410 && bouncer_x < 600)) {//Описание нажатия кнопки Играть
-					lev = 1;
+					game_window = 1;
 					g = 0;
 					al_clear_to_color(al_map_rgb(0, 0, 0));
-					cle = 99;
+					count_of_clean = 99;
 					clear(b);
 
 				}
@@ -339,66 +339,66 @@ int main(int argc, char **argv)
 			Действия ,при выборе размера поля (Переменная m отвечает за размер поля  */
 			if (g == 1) {
 				if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 370 && bouncer_y < 405) && (bouncer_x > 640 && bouncer_x < 850)) {
-					m = 10;
+					size_of_matrix = 10;
 
 
 				}
 				else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 405 && bouncer_y < 435) && (bouncer_x > 640 && bouncer_x < 850)) {
-					m = 20;
+					size_of_matrix = 20;
 
 				}
 				else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 435 && bouncer_y < 465) && (bouncer_x > 640 && bouncer_x < 850)) {
-					m = 30;
+					size_of_matrix = 30;
 
 				}
 				else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && (bouncer_y > 465 && bouncer_y < 495) && (bouncer_x > 640 && bouncer_x < 850)) {
-					m = 40;
+					size_of_matrix = 40;
 
 				}
 			}
 		}
-		if (lev == 1) {
-			for (y = 1; y < m; y++) {
+		if (game_window == 1) {
+			for (y = 1; y < size_of_matrix; y++) {
 
-				for (x = 1; x < m; x++)
+				for (x = 1; x < size_of_matrix; x++)
 				{
 					if (b[x][y] == 1) {
-						al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(0, 0, 255));
+						al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(0, 0, 255));
 						redraw = true;
 					}
 					else if (b[x][y] == 0) {
-						al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(255, 255, 255));
+						al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(255, 255, 255));
 					}
 				}
 			}
 
 
-			if (f == 3)
+			if (game_mode == 3)
 			{
-				f = 0;
+				game_mode = 0;
 
 
 			}
-			else if (f == 10 || f == 1)
+			else if (game_mode == 10 || game_mode == 1)
 			{
-				if (f == 1) f = 0;
+				if (game_mode == 1) game_mode = 0;
 
-				for (y = 1; y < m; y++) {
+				for (y = 1; y < size_of_matrix; y++) {
 
-					for (x = 1; x < m; x++)
+					for (x = 1; x < size_of_matrix; x++)
 					{
 						if (b[x][y] == 1) {
-							al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(0, 0, 255));
+							al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(0, 0, 255));
 							redraw = true;
 						}
 						else if (b[x][y] == 0) {
-							al_draw_filled_ellipse(320 + (400 / m) * x, 100 + (400 / m) * y, 160 / m, 160 / m, al_map_rgb(255, 255, 255));
+							al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(255, 255, 255));
 						}
 
 					}
 				}
-				for (j = 1; j < m; j++) {
-					for (i = 1; i < m; i++) {
+				for (j = 1; j < size_of_matrix; j++) {
+					for (i = 1; i <size_of_matrix; i++) {
 						if (b[i - 1][j - 1] == 1) k++;
 						if (b[i][j - 1] == 1) k++;
 						if (b[i + 1][j - 1] == 1) k++;
@@ -427,18 +427,18 @@ int main(int argc, char **argv)
 					}
 				}
 				int d = 0;
-				for (y = 1; y < m; y++) {
-					for (x = 1; x < m; x++)
+				for (y = 1; y < size_of_matrix; y++) {
+					for (x = 1; x < size_of_matrix; x++)
 					{
 						if (b[x][y] == a[x][y]) d++;
 
 					}
 				}
-				if (d > m*m - 2 * m) { d = 0; f = 0; }
+				if (d >size_of_matrix*size_of_matrix - 2 * size_of_matrix) { d = 0; game_mode = 0; }
 
 
-				for (y = 1; y < m; y++) {
-					for (x = 1; x < m; x++)
+				for (y = 1; y < size_of_matrix; y++) {
+					for (x = 1; x < size_of_matrix; x++)
 					{
 						b[x][y] = a[x][y];
 						redraw = true;
@@ -449,17 +449,17 @@ int main(int argc, char **argv)
 
 		}
 
-		if (lev == 0) {
+		if (game_window == 0) {
 			if (g == 1) {
 				al_draw_filled_ellipse(650, 390, 5, 5, al_map_rgb(255, 0, 2));
 				al_draw_filled_ellipse(650, 420, 5, 5, al_map_rgb(255, 0, 2));
 				al_draw_filled_ellipse(650, 450, 5, 5, al_map_rgb(255, 0, 2));
 				al_draw_filled_ellipse(650, 480, 5, 5, al_map_rgb(255, 0, 2));
 			}
-			if (m == 40 && g == 1) al_draw_filled_ellipse(650, 480, 5, 5, al_map_rgb(0, 255, 2));
-			if (m == 30 && g == 1) al_draw_filled_ellipse(650, 450, 5, 5, al_map_rgb(0, 255, 2));
-			if (m == 20 && g == 1) al_draw_filled_ellipse(650, 420, 5, 5, al_map_rgb(0, 255, 2));
-			if (m == 10 && g == 1) al_draw_filled_ellipse(650, 390, 5, 5, al_map_rgb(0, 255, 2));
+			if (size_of_matrix == 40 && g == 1) al_draw_filled_ellipse(650, 480, 5, 5, al_map_rgb(0, 255, 2));
+			if (size_of_matrix == 30 && g == 1) al_draw_filled_ellipse(650, 450, 5, 5, al_map_rgb(0, 255, 2));
+			if (size_of_matrix == 20 && g == 1) al_draw_filled_ellipse(650, 420, 5, 5, al_map_rgb(0, 255, 2));
+			if (size_of_matrix == 10 && g == 1) al_draw_filled_ellipse(650, 390, 5, 5, al_map_rgb(0, 255, 2));
 			al_flip_display();
 		}
 		al_flip_display();
