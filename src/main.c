@@ -5,19 +5,25 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_image.h>
 #include "allegro5/allegro_native_dialog.h"
+#include "functions.h"
 
 const float FPS = 60;
 const int SCREEN_W = 1000;
 const int SCREEN_H = 600;
 const int BOUNCER_SIZE = 32;
-int planer(int b[100][100]);
-int rellay(int  b[100][100]);
-int Twin_Bees(int b[100][100]);
 int clear(int b[100][100]);
 int size_of_matrix = 40;
- int game_mode = 0;
  float bouncer_x = 0.0;
  float bouncer_y = 0.0;
+ int game_mode = 0;
+ int planer(int b[100][100]);
+ int rellay(int  b[100][100]);
+ int Twin_Bees(int b[100][100]);
+ int game_window = 0;
+ int count_of_clean = 99;
+ void knopka(int size_of_matrixint,int *game_mode, int *game_window, int *count_of_clean, int b[100][100], float bouncer_x, float bouncer_y);
+
+
 int main(int argc, char **argv)
 
 {
@@ -119,14 +125,13 @@ int main(int argc, char **argv)
 	al_start_timer(timer);
 	int i, j, k, x, h, y = 1, n = 0, t = 0;
 	int a[100][100], b[100][100];
-	int game_mode = 0;
-	int count_of_clean = 99;
-	int game_window = 0;
+	
+	
+	
 	int kol = 0, kol_max = 300, c1 = 0;
 	int life = 0, dead = 0;
 	clear(b);
-
-
+	
 
 
 
@@ -196,49 +201,12 @@ int main(int argc, char **argv)
 		{
 			if (game_window == 1) {//Переменная game_window отвечает за открытие определенного окна ,если game_window=0 - стартовое ,game_window=1 -игровое
 
-						   /*Далее,деяствие,при нажатии на кнопку Start:
-						   Переход в режим многократных действий
-						   */
-				
-				if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 180 && bouncer_x < 330)) {
-					game_mode = 10;
-				}
 
-				/*Далее,деяствие,при нажатии на кнопку Step:
-				Переход в режим однократного действия
-				*/
-			
-				else if (((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 340 && bouncer_x < 490))) {
-					game_mode = 1;
-				}
-
-
-					/*Далее,деяствие,при нажатии на кнопку Stop:
-					Остановка игрового процесса
-					*/
-				else if ((bouncer_y
-					> 0 && bouncer_y < 80) && (bouncer_x > 500 && bouncer_x < 670)) {
-					game_mode = 3;
-				}
-				/*Далее,деяствие,при нажатии на кнопку Clear:
-				Обнуление матрицы b
-				*/
-				else if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 680 && bouncer_x < 840)) {
-					clear(b);
-
-				}
-				/*Далее,деяствие,при нажатии на кнопку Menu:
-				Открытие стартового окна
-				*/
-				else if ((bouncer_y > 525 && bouncer_y < 600) && (bouncer_x > 800 && bouncer_x < 1000)) {
-					game_window = 0;
-					count_of_clean = 99;
-				}
-
+				knopka(size_of_matrix, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
 				/*Далее,деяствие,при нажатии на кнопку Random :
 				Каждой ячейче матрицы b присваивается рандомное значение 0 или 1
 				*/
-				else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 10 && bouncer_x < 120)) {
+				if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 10 && bouncer_x < 120)) {
 					srand((unsigned)time(NULL));
 					for (j = 1; j < size_of_matrix; j++) {
 
@@ -249,60 +217,7 @@ int main(int argc, char **argv)
 						}
 					}
 				}
-				/*Далее,деяствие,при нажатии на кнопку Planer :
-				Пtрвоначальная очиства матрицы b ,далее выполнение функции b1,которая присваивает матрице b нужные значения
-				*/
-				else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 155 && bouncer_x < 260)) {
-					clear(b);
-					planer(b);
-				}
-				/*Далее,деяствие,при нажатии на кнопку Rellay :
-				Пtрвоначальная очиства матрицы b ,далее выполнение функции b2,которая присваивает матрице b нужные значения
-				*/
 
-				else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 290 && bouncer_x <380)) {
-					clear(b);
-
-					rellay(b);
-
-
-				}
-
-				//Кнопка "Twin Bees":
-				else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 430 && bouncer_x < 570)) {
-					clear(b);
-					Twin_Bees(b);
-				}
-				/*
-				Далее идет просерка попадания пользователем в игровые ячейки ,если координаты мыши удовлетворяют
-				определенным условиям-пользователь попадает в игровую ячейку,связанную с матрицей b ТО:
-				если элемент b был равен 0 ,то он становится равным 1
-				если элемент b был равен 1 ,то он становится равным 0
-				*/
-
-
-				else {
-
-					for (y = 1; y < size_of_matrix; y++) {
-						if ((bouncer_y > 100 - 160 / size_of_matrix + (400 / size_of_matrix) * y) && (bouncer_y < 100 + 160 / size_of_matrix + (400 / size_of_matrix) * y))
-							for (x = 1; x < size_of_matrix; x++)
-							{
-								if ((bouncer_x > 320 - 160 / size_of_matrix + (400 / size_of_matrix) * x) && (bouncer_x < 320 + 160 / size_of_matrix + (400 / size_of_matrix) * x)) {
-									if (b[x][y] == 1) {
-										b[x][y] = 0;
-										kol--;
-
-									}
-									else if ((b[x][y] == 0) && kol < kol_max) {
-										b[x][y] = 1;
-										kol++;
-									}
-
-								}
-
-							}
-					}
-				}
 			}
 			/*
 			Описание обработки результатов в режиме стартового окна  */
