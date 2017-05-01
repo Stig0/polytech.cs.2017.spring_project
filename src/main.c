@@ -82,9 +82,7 @@ int main(int argc, char **argv)
 	}
 	
 
-	image = al_load_bitmap("res/fon_menu.jpg");
-	image = al_load_bitmap("res/menu_op.jpg");
-	image = al_load_bitmap("res/menu_op.jpg");
+	image = al_load_bitmap("src/res/fon_menu.jpg");
 	if (!image) {
 		al_show_native_message_box(display, "Error", "Error", "Failed to load image!",
 			NULL, ALLEGRO_MESSAGEBOX_ERROR);
@@ -113,8 +111,8 @@ int main(int argc, char **argv)
 	al_init_font_addon(); // initialize the font addon
 	al_init_ttf_addon();// initialize the ttf (True Type Font) addon
 
-	ALLEGRO_FONT *font_goldana = al_load_font("res/Goldana.ttf", 45, 0);
-	ALLEGRO_FONT *font_pirulen = al_load_font("res/pirulen.ttf", 24, 0);
+	ALLEGRO_FONT *font_goldana = al_load_font("src/res/Goldana.ttf", 45, 0);
+	
 	al_init_primitives_addon();
 	al_flip_display();
 	al_start_timer(timer);
@@ -135,17 +133,17 @@ int main(int argc, char **argv)
 			count_of_clean = 0;                           // а нужные прорисовываются снова
 			if (game_window == 0) {                                  //Прорисовка стартового окна
 
-				image = al_load_bitmap("res/fon_menu.jpg"); //Загрузка фона для стартового окна
+				image = al_load_bitmap("src/res/fon_menu.jpg"); //Загрузка фона для стартового окна
 				al_draw_bitmap(image, 0, 0, 0);             //Прорисовка фона для стартового окна
 				if (size_settings == 1)
 				{
-					image = al_load_bitmap("res/menu_op.jpg"); //Загрузка фона для стартового окна
+					image = al_load_bitmap("src/res/menu_op.jpg");  //Загрузка фона для стартового окна
 					al_draw_bitmap(image, 0, 0, 0);           //Прорисовка фона для стартового окна
 				}
 
 			}
 			if (game_window == 1) {                                      //Начало прорисовки интерфейса игрового процесса
-				image = al_load_bitmap("res/play_fon.jpg"); //Загрузка фона
+				image = al_load_bitmap("src/res/play_fon.jpg"); //Загрузка фона
 				al_draw_bitmap(image, 0, 0, 0);            //Прорисовка фона
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 10, 500, 0, "Random");
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 150, 500, 0, "Planer");
@@ -194,12 +192,12 @@ int main(int argc, char **argv)
 					if (size_settings == 0) {
 						size_settings = 1;
 
-						image = al_load_bitmap("res/menu_op.jpg");
+						image = al_load_bitmap("src/res/menu_op.jpg");
 						al_draw_bitmap(image, 0, 0, 0);
 					}
 					else if (size_settings == 1) {
 						size_settings = 0;
-						image = al_load_bitmap("res/fon_menu.jpg");
+						image = al_load_bitmap("src/res/fon_menu.jpg");
 						al_draw_bitmap(image, 0, 0, 0);
 					}
 				}
@@ -279,8 +277,6 @@ int main(int argc, char **argv)
 	al_destroy_display(display);
 	al_destroy_event_queue(event_queue);
 	al_destroy_font(font_goldana);
-	al_destroy_font(font_pirulen);
-
 	return 0;
 }
 
