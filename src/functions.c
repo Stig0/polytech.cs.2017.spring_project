@@ -8,7 +8,7 @@ void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, i
 	
 	for (j = 1; j < size_of_matrix; j++) {
 		for (i = 1; i <size_of_matrix; i++) {
-			//Поиск живых клеток
+			//Поиск живых клеток,среди 8 соседей 
 			if (b[i - 1][j - 1] == 1) number_of_neighbors++;
 			if (b[i][j - 1] == 1) number_of_neighbors++;
 			if (b[i + 1][j - 1] == 1) number_of_neighbors++;
