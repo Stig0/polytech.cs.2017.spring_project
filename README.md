@@ -1,5 +1,5 @@
 ﻿# polytech.cs.2017.spring_project
-                       **Game of life**
+**Game of life**
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
