@@ -5,10 +5,10 @@
 int clear(int b[100][100]);
 void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, int size_of_matrix,int *game_mode) {
 	int  i = 0, j = 0,x=0,y=0;
-	
+
 	for (j = 1; j < size_of_matrix; j++) {
 		for (i = 1; i <size_of_matrix; i++) {
-			//Поиск живых клеток,среди 8 соседей 
+			//Поиск живых клеток,среди 8 соседей
 			if (b[i - 1][j - 1] == 1) number_of_neighbors++;
 			if (b[i][j - 1] == 1) number_of_neighbors++;
 			if (b[i + 1][j - 1] == 1) number_of_neighbors++;
@@ -19,18 +19,18 @@ void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, i
 			if (b[i + 1][j + 1] == 1) number_of_neighbors++;
 			if (b[i][j] == 1)
 			{
-				if ((number_of_neighbors == 2) || (number_of_neighbors == 3))a[i][j] = 1;//Если клетка жива и 2 или 3 соседа, клетка живет 
+				if ((number_of_neighbors == 2) || (number_of_neighbors == 3))a[i][j] = 1;//Если клетка жива и 2 или 3 соседа, клетка живет
 				else {
-					a[i][j] = 0;//Если нет,то умирает 
+					a[i][j] = 0;//Если нет,то умирает
 
 				}
 			}
 			if (b[i][j] == 0) {
 				if ((number_of_neighbors == 3)) {
-					a[i][j] = 1;//Если клетка мертва и 3 соседа, клетка оживает  
+					a[i][j] = 1;//Если клетка мертва и 3 соседа, клетка оживает
 
 				}
-				else a[i][j] = 0;//Если нет,то остается мертвой 
+				else a[i][j] = 0;//Если нет,то остается мертвой
 			}
 			number_of_neighbors = 0;
 
@@ -47,12 +47,12 @@ void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, i
 	}
 	if (d >size_of_matrix*size_of_matrix - 2 * size_of_matrix) { d = 0; (*game_mode) = 0; }
 
-	//Приравнивание текущей и предыдущей матриц 
+	//Приравнивание текущей и предыдущей матриц
 	for (y = 1; y < size_of_matrix; y++) {
 		for (x = 1; x < size_of_matrix; x++)
 		{
 			b[x][y] = a[x][y];
-			
+
 		}
 	}
 }
@@ -183,7 +183,7 @@ void knopka(int size_of_matrix, int *Game_on, int *size_settings,int *game_mode,
 
 			(*Game_on) = 0;
 		}
-		
+
 	}
 }
 
