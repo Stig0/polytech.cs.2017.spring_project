@@ -21,11 +21,7 @@ FILES_O  := $(FILES_C:.c=.o)
 CFLAGS  := -lm
 LFLAGS  := 
 
-# ------------
-# Targets 
-# ------------
-	#$(CC) -c -I. $(D_SRC) -L. -lallegro -o $@
-	#$(CC) -c -I $(LIBS) $(D_SRC) $(CFLAGS) $< -o  $@
+
 default: $(PROJECT)
 %.o: %.c
 	$(CC) -c -I $(D_SRC) $(CFLAGS) $< -o  $@
