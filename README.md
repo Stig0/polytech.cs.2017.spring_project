@@ -25,7 +25,7 @@ make clean
 ````
 
 ## Authors
-* **Nikolaev Denis** - den11nik@yndex.ru
+* **Nikolaev Denis** - den11nik@yandex.ru
 * **Puzko Danila** - danilapuzko@mail.ru
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
