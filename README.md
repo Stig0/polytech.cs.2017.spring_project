@@ -1,5 +1,5 @@
-# polytech.cs.2017.spring_project
-Игра Жизнь
+﻿# polytech.cs.2017.spring_project
+                       **Game of life**
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -25,7 +25,7 @@ make clean
 ````
 
 ## Authors
-* **Name Surname** - xxx@spbstu.ru
-
+* **Nikolaev Denis** - den11nik@yndex.ru
+* **Puzko Danila** - danilapuzko@mail.ru
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
