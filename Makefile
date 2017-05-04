@@ -18,7 +18,7 @@ FILES_O  := $(FILES_C:.c=.o)
 # ------------
 # Flags 
 # ------------
-CFLAGS  := -Ö\
+CFLAGS  := -Wall
 LFLAGS  := 
 
 
