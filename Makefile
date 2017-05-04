@@ -5,7 +5,7 @@ PROJECT  := GAME_OF_LIFE
 # ------------------
 # External programs
 # ------------------
-CC  := gcc -g -w
+CC  := gcc
 RM  := rm -rf
 
 # --------------------
@@ -18,7 +18,7 @@ FILES_O  := $(FILES_C:.c=.o)
 # ------------
 # Flags 
 # ------------
-CFLAGS  := -lm
+CFLAGS  := -Ö\
 LFLAGS  := 
 
 
