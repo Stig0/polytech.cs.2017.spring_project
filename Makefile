@@ -28,7 +28,7 @@ default: $(PROJECT)
 
 $(PROJECT): $(FILES_O)
 	$(CC) -I $(D_SRC) $(LFLAGS) $(FILES_O) -I/allegro5/addons/ -lallegro -lallegro_main -lallegro_image -lallegro_dialog -lallegro_primitives -lallegro_ttf -lallegro_font -o $@ -lm
+
 .phony:	clean
 clean:
 	-$(RM) $(FILES_O) $(PROJECT)
-	
