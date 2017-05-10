@@ -1,7 +1,8 @@
+#include "knopka.h"
 #include "lib.h"
-int clear(int b[100][100]);
 void knopka(int size_of_matrix, int *Game_on, int *size_settings,int *game_mode, int *game_window, int *count_of_clean, int b[100][100], float bouncer_x, float bouncer_y)
  {
+
 	int randon_number = 0, i = 0, j = 0;
 	if ((*game_window) == 1) {
 		/*Далее,действие,при нажатии на кнопку Start:
@@ -100,7 +101,6 @@ void knopka(int size_of_matrix, int *Game_on, int *size_settings,int *game_mode,
 		if ((bouncer_y > 350 && bouncer_y < 390) && (bouncer_x > 410 && bouncer_x < 600)) {//Описание нажатия кнопки Играть
 			(*game_window) = 1;
 			(*size_settings )= 0;
-			al_clear_to_color(al_map_rgb(0, 0, 0));
 			(*count_of_clean) = 99;
 			clear(b);
 

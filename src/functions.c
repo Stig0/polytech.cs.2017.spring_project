@@ -1,4 +1,5 @@
 #include "lib.h"
+#include "functions.h"
 int clear(int b[100][100]);
 void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, int size_of_matrix,int *game_mode) {
 	int  i = 0, j = 0,x=0,y=0;
