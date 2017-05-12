@@ -43,7 +43,7 @@ void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, i
 
 		}
 	}
-	if (d >size_of_matrix*size_of_matrix - 2 * size_of_matrix) { d = 0; (*game_mode) = 0; }
+	if (d >size_of_matrix*size_of_matrix) { d = 0; (*game_mode) = 0; }
 
 	//Приравнивание текущей и предыдущей матриц
 	for (y = 1; y < size_of_matrix; y++) {

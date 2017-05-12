@@ -4,14 +4,14 @@
 
 int main(int argc, char **argv)
 
-{//С 38 по 119 строчку инициализация различных механизмов библиотеки 
+{//С 38 по 119 строчку инициализация различных механизмов библиотеки
 	ALLEGRO_DISPLAY_MODE *al_get_display_mode(int index, ALLEGRO_DISPLAY_MODE *mode);
 	ALLEGRO_DISPLAY *display = NULL;
 	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 	ALLEGRO_TIMER *timer = NULL;
 	ALLEGRO_BITMAP *bouncer = NULL;
 	ALLEGRO_BITMAP *image = NULL;
-	
+
 	if (!al_init()) {
 		fprintf(stderr, "failed to initialize allegro!\n");
 		return -1;
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 		al_destroy_timer(timer);
 		return -1;
 	}
-	
+
 
 	image = al_load_bitmap("src/res/fon_menu.jpg");
 	if (!image) {
@@ -55,13 +55,13 @@ int main(int argc, char **argv)
 		al_destroy_display(display);
 		return 0;
 	}
-	
+
 	al_draw_bitmap(image, 0, 0, 0);
 	al_set_target_bitmap(bouncer);
 	al_clear_to_color(al_map_rgb(255, 0, 255));
 	al_set_target_bitmap(al_get_backbuffer(display));
 	event_queue = al_create_event_queue();
-	
+
 	if (!event_queue) {
 		fprintf(stderr, "failed to create event_queue!\n");
 		al_destroy_bitmap(bouncer);
@@ -78,14 +78,14 @@ int main(int argc, char **argv)
 	al_init_ttf_addon();// initialize the ttf (True Type Font) addon
 
 	ALLEGRO_FONT *font_goldana = al_load_font("src/res/Goldana.ttf", 45, 0);
-	
+
 	al_init_primitives_addon();
 	al_flip_display();
 	al_start_timer(timer);
 
-	int x=0, y = 0;//Переменные для циклов FOR 
+	int x=0, y = 0;//Переменные для циклов FOR
 	int a[100][100], b[100][100];//Две основные матрицы игры (их назначение описано в плане реализации проекта )
-	int number_of_neighbors = 0;//Счетчик количества соседей у каждой живой клетки 
+	int number_of_neighbors = 0;//Счетчик количества соседей у каждой живой клетки
 	int size_settings = 0; //Режим меню выбора размера матрицы(при size_settings=0 меню закрыто,при size_settings=1 меню открыто
 	int Game_on = 1;
 	al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -129,7 +129,7 @@ int main(int argc, char **argv)
 		al_wait_for_event(event_queue, &ev);
 
 		if (ev.type == ALLEGRO_EVENT_TIMER) {   //Подключение таймера
-			
+
 		}
 		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {  //Случай закрытия пользователем дисплея
 			break;
@@ -146,11 +146,11 @@ int main(int argc, char **argv)
 		if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)   //Координаты обрабатываются при нажатии пользователем на экран
 		{
 			knopka(size_of_matrix,&Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
-			
+
 			/*
 			Прорисовка меню настроек*/
 			if (game_window == 0) {
-				
+
 				if ((bouncer_y > 390 && bouncer_y < 430) && (bouncer_x > 420 && bouncer_x < 600)) {//Описание нажатия кнопки Настройки
 
 					al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -174,14 +174,14 @@ int main(int argc, char **argv)
 			}
 		}
 		if (game_window == 1) {
-			//Прорисовка игровых ячеек 
+			//Прорисовка игровых ячеек
 			for (y = 1; y < size_of_matrix; y++) {
 
 				for (x = 1; x < size_of_matrix; x++)
 				{
 					if (b[x][y] == 1) {
 						al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(0, 0, 255));
-						
+
 					}
 					else if (b[x][y] == 0) {
 						al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(255, 255, 255));
@@ -189,7 +189,7 @@ int main(int argc, char **argv)
 				}
 			}
 
-			//Остановка игрового цикла 
+			//Остановка игрового цикла
 			if (game_mode == 3)
 			{
 				game_mode = 0;
@@ -199,27 +199,27 @@ int main(int argc, char **argv)
 			else if (game_mode == 10 || game_mode == 1)
 			{
 				if (game_mode == 1) game_mode = 0;
-				//Прорисовка игровых ячеек 
+				//Прорисовка игровых ячеек
 				for (y = 1; y < size_of_matrix; y++) {
 					for (x = 1; x < size_of_matrix; x++)
 					{
 						if (b[x][y] == 1) {
 							al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(0, 0, 255));
-							
+
 						}
 						else if (b[x][y] == 0) {
 							al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(255, 255, 255));
 						}
 					}
 				}
-				//Выполнение главного алгоритма игры 
+				//Выполнение главного алгоритма игры
 				main_algorithm( b,  a,  number_of_neighbors,  size_of_matrix,&game_mode);
-				
+
 
 			}
 
 		}
-		//Следующая часть кода отвечает за красные и зеленые ячейки напротив размера поля 
+		//Следующая часть кода отвечает за красные и зеленые ячейки напротив размера поля
 		if (game_window == 0) {
 			if (size_settings == 1) {
 				al_draw_filled_ellipse(650, 390, 5, 5, al_map_rgb(255, 0, 2));
@@ -227,10 +227,10 @@ int main(int argc, char **argv)
 				al_draw_filled_ellipse(650, 450, 5, 5, al_map_rgb(255, 0, 2));
 				al_draw_filled_ellipse(650, 480, 5, 5, al_map_rgb(255, 0, 2));
 
-				if (size_of_matrix == 40  ) al_draw_filled_ellipse(650, 480, 5, 5, al_map_rgb(0, 255, 2));
-				if (size_of_matrix == 30  ) al_draw_filled_ellipse(650, 450, 5, 5, al_map_rgb(0, 255, 2));
-				if (size_of_matrix == 20  ) al_draw_filled_ellipse(650, 420, 5, 5, al_map_rgb(0, 255, 2));
-				if (size_of_matrix == 10  ) al_draw_filled_ellipse(650, 390, 5, 5, al_map_rgb(0, 255, 2));
+				if (size_of_matrix == 41  ) al_draw_filled_ellipse(650, 480, 5, 5, al_map_rgb(0, 255, 2));
+				if (size_of_matrix == 31  ) al_draw_filled_ellipse(650, 450, 5, 5, al_map_rgb(0, 255, 2));
+				if (size_of_matrix == 21  ) al_draw_filled_ellipse(650, 420, 5, 5, al_map_rgb(0, 255, 2));
+				if (size_of_matrix == 11  ) al_draw_filled_ellipse(650, 390, 5, 5, al_map_rgb(0, 255, 2));
 				al_flip_display();
 			}
 		}
