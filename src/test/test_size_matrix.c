@@ -21,13 +21,13 @@ TEST(TestSizeMatrix, sizematrix)
 {
 	int size_of_matrix=0;
 	size_matrix(&size_of_matrix, 660, 420);
-	TEST_ASSERT_EQUAL_INT( 20, size_of_matrix );
+	TEST_ASSERT_EQUAL_INT( 21, size_of_matrix );
 	size_matrix(&size_of_matrix, 710, 380);
-	TEST_ASSERT_EQUAL_INT( 10, size_of_matrix );
+	TEST_ASSERT_EQUAL_INT( 11, size_of_matrix );
 	size_matrix(&size_of_matrix, 650, 440);
-	TEST_ASSERT_EQUAL_INT( 30, size_of_matrix );
+	TEST_ASSERT_EQUAL_INT( 31, size_of_matrix );
 	size_matrix(&size_of_matrix, 700, 470);
-	TEST_ASSERT_EQUAL_INT( 40, size_of_matrix );
+	TEST_ASSERT_EQUAL_INT( 41, size_of_matrix );
 }
 
 
