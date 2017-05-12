@@ -2,24 +2,24 @@
 #include "unity.h"
 #include "unity_fixture.h"
 
-TEST_GROUP(TestArray2);
+TEST_GROUP(TestMainAlgorithm);
 
-TEST_GROUP_RUNNER(TestArray2)
+TEST_GROUP_RUNNER(TestMainAlgorithm)
 {
-    RUN_TEST_CASE(TestArray2, mainalgorithm1);
-    RUN_TEST_CASE(TestArray2, mainalgorithm2);
-    RUN_TEST_CASE(TestArray2, mainalgorithm3);
+    RUN_TEST_CASE(TestMainAlgorithm, mainalgorithm1);
+    RUN_TEST_CASE(TestMainAlgorithm, mainalgorithm2);
+    RUN_TEST_CASE(TestMainAlgorithm, mainalgorithm3);
 }
 
-TEST_SETUP(TestArray2)
-{
-}
-
-TEST_TEAR_DOWN(TestArray2)
+TEST_SETUP(TestMainAlgorithm)
 {
 }
 
-TEST(TestArray2, mainalgorithm1)
+TEST_TEAR_DOWN(TestMainAlgorithm)
+{
+}
+
+TEST(TestMainAlgorithm, mainalgorithm1)
 {
 	int a[100][100], b[100][100], c[100][100];
 	int i, j = 0, number=0, game_mode=1;
@@ -43,7 +43,7 @@ TEST(TestArray2, mainalgorithm1)
 	TEST_ASSERT_EQUAL_INT_ARRAY(a, c, 10000);
 }
 
-TEST(TestArray2, mainalgorithm2)
+TEST(TestMainAlgorithm, mainalgorithm2)
 {
 	int a[100][100], b[100][100], c[100][100];
 	int i, j = 0, number=0, game_mode=1;
@@ -66,7 +66,7 @@ TEST(TestArray2, mainalgorithm2)
 	TEST_ASSERT_EQUAL_INT_ARRAY(a, c, 10000);
 }
 
-TEST(TestArray2, mainalgorithm3)
+TEST(TestMainAlgorithm, mainalgorithm3)
 {
 	int a[100][100], b[100][100], c[100][100];
 	int i, j = 0, number=0, game_mode=1;

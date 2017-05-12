@@ -3,10 +3,12 @@
 
 static void RunAllTests(void)
 {
-    RUN_TEST_GROUP(TestArray);
-    RUN_TEST_GROUP(TestArray1);
-    RUN_TEST_GROUP(TestArray2);
-    RUN_TEST_GROUP(TestArray3);
+    RUN_TEST_GROUP(TestButtonInPlayWindow);
+    RUN_TEST_GROUP(TestButtonInStartWindow);
+    RUN_TEST_GROUP(TestClean);
+    RUN_TEST_GROUP(TestMainAlgorithm);
+    RUN_TEST_GROUP(TestSizeMatrix);
+    RUN_TEST_GROUP(TestPlayObject);
 }
 
 int main(int argc, const char * argv[])

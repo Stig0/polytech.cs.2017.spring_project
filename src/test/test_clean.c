@@ -3,22 +3,22 @@
 #include "clean.h"
 
 
-TEST_GROUP(TestArray1);
+TEST_GROUP(TestClean);
 
-TEST_GROUP_RUNNER(TestArray1)
+TEST_GROUP_RUNNER(TestClean)
 {
-    RUN_TEST_CASE(TestArray1, addToArray);
+    RUN_TEST_CASE(TestClean, FuncionClean);
 }
 
-TEST_SETUP(TestArray1)
-{
-}
-
-TEST_TEAR_DOWN(TestArray1)
+TEST_SETUP(TestClean)
 {
 }
 
-TEST(TestArray1, addToArray)
+TEST_TEAR_DOWN(TestClean)
+{
+}
+
+TEST(TestClean, FuncionClean)
 {
 	int a[100][100], b[100][100];
 	int i=0, j=0;
@@ -29,8 +29,8 @@ TEST(TestArray1, addToArray)
 	}
 	clear(b);
 
-	
+
 	TEST_ASSERT_EQUAL_INT_ARRAY( a, b, 10000);
-	
+
 
 }

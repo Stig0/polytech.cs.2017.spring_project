@@ -4,26 +4,26 @@
 #include "functions.h"
 #include "lib.h"
 #include "clean.h"
-TEST_GROUP(TestArray);
+TEST_GROUP(TestButtonInPlayWindow);
 
-TEST_GROUP_RUNNER(TestArray)
+TEST_GROUP_RUNNER(TestButtonInPlayWindow)
 {
-    RUN_TEST_CASE(TestArray, buttonstart);
-    RUN_TEST_CASE(TestArray, buttonstep);
-    RUN_TEST_CASE(TestArray, buttonstop);
-    RUN_TEST_CASE(TestArray, buttonclean);
-    RUN_TEST_CASE(TestArray, buttonmenu);
+    RUN_TEST_CASE(TestButtonInPlayWindow, buttonstart);
+    RUN_TEST_CASE(TestButtonInPlayWindow, buttonstep);
+    RUN_TEST_CASE(TestButtonInPlayWindow, buttonstop);
+    RUN_TEST_CASE(TestButtonInPlayWindow, buttonclean);
+    RUN_TEST_CASE(TestButtonInPlayWindow, buttonmenu);
 }
 
-TEST_SETUP(TestArray)
-{
-}
-
-TEST_TEAR_DOWN(TestArray)
+TEST_SETUP(TestButtonInPlayWindow)
 {
 }
 
-TEST(TestArray, buttonstart)
+TEST_TEAR_DOWN(TestButtonInPlayWindow)
+{
+}
+
+TEST(TestButtonInPlayWindow, buttonstart)
 {
 	int a[100][100], b[100][100];
 	int i=0, j=0;
@@ -35,7 +35,7 @@ TEST(TestArray, buttonstart)
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean,b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT(10, game_mode);
 }
-TEST(TestArray, buttonstep)
+TEST(TestButtonInPlayWindow, buttonstep)
 {
 	int a[100][100], b[100][100];
 	int i=0, j=0;
@@ -47,8 +47,8 @@ TEST(TestArray, buttonstep)
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT(1, game_mode);
 }
-TEST(TestArray, buttonstop)
-{	
+TEST(TestButtonInPlayWindow, buttonstop)
+{
 	int a[100][100], b[100][100];
 	int i=0, j=0;
 	int size_of_matrix=40, Game_on=0, size_settings=0, game_mode=0, game_window=1, count_of_clean=0;
@@ -59,7 +59,7 @@ TEST(TestArray, buttonstop)
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT(3, game_mode);
 }
-TEST(TestArray, buttonclean)
+TEST(TestButtonInPlayWindow, buttonclean)
 {
 	int a[100][100], b[100][100];
 	int i=0, j=0;
@@ -76,7 +76,7 @@ TEST(TestArray, buttonclean)
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT_ARRAY(a, b, 10000);
 }
-TEST(TestArray, buttonmenu)
+TEST(TestButtonInPlayWindow, buttonmenu)
 {
 	int a[100][100], b[100][100];
 	int i=0, j=0;
@@ -87,7 +87,7 @@ TEST(TestArray, buttonmenu)
 	bouncer_y = 550.0;
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT(0, game_window);
-TEST_ASSERT_EQUAL_INT(99, count_of_clean);
-	
-	
+    TEST_ASSERT_EQUAL_INT(99, count_of_clean);
+
+
 }
