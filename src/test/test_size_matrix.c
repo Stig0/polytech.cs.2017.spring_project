@@ -2,22 +2,22 @@
 #include "unity_fixture.h"
 #include "size_matrix.h"
 
-TEST_GROUP(TestArray3);
+TEST_GROUP(TestSizeMatrix);
 
-TEST_GROUP_RUNNER(TestArray3)
+TEST_GROUP_RUNNER(TestSizeMatrix)
 {
-    RUN_TEST_CASE(TestArray3, sizematrix);
+    RUN_TEST_CASE(TestSizeMatrix, sizematrix);
 }
 
-TEST_SETUP(TestArray3)
-{
-}
-
-TEST_TEAR_DOWN(TestArray3)
+TEST_SETUP(TestSizeMatrix)
 {
 }
 
-TEST(TestArray3, sizematrix)
+TEST_TEAR_DOWN(TestSizeMatrix)
+{
+}
+
+TEST(TestSizeMatrix, sizematrix)
 {
 	int size_of_matrix=0;
 	size_matrix(&size_of_matrix, 660, 420);
@@ -29,6 +29,6 @@ TEST(TestArray3, sizematrix)
 	size_matrix(&size_of_matrix, 700, 470);
 	TEST_ASSERT_EQUAL_INT( 40, size_of_matrix );
 }
-	
+
 
 
