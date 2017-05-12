@@ -1,7 +1,25 @@
 #include "functions.h"
 #include "unity.h"
+#include "unity_fixture.h"
 
-void test_main_alghorithm_1(void)
+TEST_GROUP(TestArray2);
+
+TEST_GROUP_RUNNER(TestArray2)
+{
+    RUN_TEST_CASE(TestArray2, mainalgorithm1);
+    RUN_TEST_CASE(TestArray2, mainalgorithm2);
+    RUN_TEST_CASE(TestArray2, mainalgorithm3);
+}
+
+TEST_SETUP(TestArray2)
+{
+}
+
+TEST_TEAR_DOWN(TestArray2)
+{
+}
+
+TEST(TestArray2, mainalgorithm1)
 {
 	int a[100][100], b[100][100], c[100][100];
 	int i, j = 0, number=0, game_mode=1;
@@ -25,7 +43,7 @@ void test_main_alghorithm_1(void)
 	TEST_ASSERT_EQUAL_INT_ARRAY(a, c, 10000);
 }
 
-void test_main_alghorithm_2(void)
+TEST(TestArray2, mainalgorithm2)
 {
 	int a[100][100], b[100][100], c[100][100];
 	int i, j = 0, number=0, game_mode=1;
@@ -48,7 +66,7 @@ void test_main_alghorithm_2(void)
 	TEST_ASSERT_EQUAL_INT_ARRAY(a, c, 10000);
 }
 
-void test_main_alghorithm_3(void)
+TEST(TestArray2, mainalgorithm3)
 {
 	int a[100][100], b[100][100], c[100][100];
 	int i, j = 0, number=0, game_mode=1;

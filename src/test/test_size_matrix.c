@@ -1,7 +1,23 @@
 #include "unity.h"
+#include "unity_fixture.h"
 #include "size_matrix.h"
 
-void test_size_matrix(void)
+TEST_GROUP(TestArray3);
+
+TEST_GROUP_RUNNER(TestArray3)
+{
+    RUN_TEST_CASE(TestArray3, sizematrix);
+}
+
+TEST_SETUP(TestArray3)
+{
+}
+
+TEST_TEAR_DOWN(TestArray3)
+{
+}
+
+TEST(TestArray3, sizematrix)
 {
 	int size_of_matrix=0;
 	size_matrix(&size_of_matrix, 660, 420);

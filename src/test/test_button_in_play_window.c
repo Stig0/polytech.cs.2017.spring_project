@@ -1,9 +1,29 @@
 #include "unity.h"
+#include "unity_fixture.h"
 #include "knopka.h"
 #include "functions.h"
 #include "lib.h"
 #include "clean.h"
-void test_button_start(void)
+TEST_GROUP(TestArray);
+
+TEST_GROUP_RUNNER(TestArray)
+{
+    RUN_TEST_CASE(TestArray, buttonstart);
+    RUN_TEST_CASE(TestArray, buttonstep);
+    RUN_TEST_CASE(TestArray, buttonstop);
+    RUN_TEST_CASE(TestArray, buttonclean);
+    RUN_TEST_CASE(TestArray, buttonmenu);
+}
+
+TEST_SETUP(TestArray)
+{
+}
+
+TEST_TEAR_DOWN(TestArray)
+{
+}
+
+TEST(TestArray, buttonstart)
 {
 	int a[100][100], b[100][100];
 	int i=0, j=0;
@@ -15,7 +35,7 @@ void test_button_start(void)
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean,b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT(10, game_mode);
 }
-void test_button_step(void)
+TEST(TestArray, buttonstep)
 {
 	int a[100][100], b[100][100];
 	int i=0, j=0;
@@ -27,7 +47,7 @@ void test_button_step(void)
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT(1, game_mode);
 }
-void test_button_stop(void)
+TEST(TestArray, buttonstop)
 {	
 	int a[100][100], b[100][100];
 	int i=0, j=0;
@@ -39,7 +59,7 @@ void test_button_stop(void)
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT(3, game_mode);
 }
-void test_button_clean(void)
+TEST(TestArray, buttonclean)
 {
 	int a[100][100], b[100][100];
 	int i=0, j=0;
@@ -56,7 +76,7 @@ void test_button_clean(void)
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT_ARRAY(a, b, 10000);
 }
-void test_button_menu(void)
+TEST(TestArray, buttonmenu)
 {
 	int a[100][100], b[100][100];
 	int i=0, j=0;

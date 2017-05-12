@@ -1,6 +1,7 @@
 #include "lib.h"
 #include "main.h"
 
+
 int main(int argc, char **argv)
 
 {//С 38 по 119 строчку инициализация различных механизмов библиотеки 

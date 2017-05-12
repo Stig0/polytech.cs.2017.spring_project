@@ -1,7 +1,24 @@
 #include "unity.h"
+#include "unity_fixture.h"
 #include "clean.h"
 
-void test_clean(void)
+
+TEST_GROUP(TestArray1);
+
+TEST_GROUP_RUNNER(TestArray1)
+{
+    RUN_TEST_CASE(TestArray1, addToArray);
+}
+
+TEST_SETUP(TestArray1)
+{
+}
+
+TEST_TEAR_DOWN(TestArray1)
+{
+}
+
+TEST(TestArray1, addToArray)
 {
 	int a[100][100], b[100][100];
 	int i=0, j=0;

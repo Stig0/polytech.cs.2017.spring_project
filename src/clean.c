@@ -1,3 +1,4 @@
+#include "clean.h"
 int clear(int b[100][100]) {
 	int i, j = 0;
 	int size_of_matrix = 100;
