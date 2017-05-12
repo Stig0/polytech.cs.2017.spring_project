@@ -1,4 +1,4 @@
-SHELL = /bin/sh 
+SHELL = /bin/sh
 
 PROJECT  := GAME_OF_LIFE
 
@@ -12,23 +12,49 @@ RM  := rm -rf
 # Directories & Files
 # --------------------
 D_SRC    := ./src
-FILES_C  := $(wildcard $(D_SRC)/*.c)
-FILES_O  := $(FILES_C:.c=.o)
+D_TESTS  := $(D_SRC)/test
+D_UNITY  := 
+
+ENTRY_POINT := $(D_SRC)/main.c
+
+FILES_PROGR_C :=  $(filter-out $(ENTRY_POINT), $(wildcard $(D_SRC)/*.c))
+FILES_TESTS_C :=  $(wildcard $(D_TESTS)/*.c) $(D_UNITY)/src/unity.c $(D_UNITY)/extras/fixture/src/unity_fixture.c
+
+PROJECT_WITHOUT_TESTS := $(FILES_PROGR_C) $(ENTRY_POINT)
+PROJECT_WITH_TESTS := $(FILES_TESTS_C) $(FILES_PROGR_C)
+
+PROJECT_WITHOUT_TESTS_O  := $(PROJECT_WITHOUT_TESTS:.c=.o)
+PROJECT_WITH_TESTS_O  := $(PROJECT_WITH_TESTS:.c=.o)
 
 # ------------
 # Flags 
 # ------------
 CFLAGS  := -Wall
-LFLAGS  := 
+CFLAGS  += -std=c99
+LFLAGS  :=
 
-
+INCS := -I $(D_UNITY)/src -I $(D_UNITY)/extras/fixture/src 
+ALLEGRO := -I/allegro5/addons/ -lallegro -lallegro_main -lallegro_image -lallegro_dialog -lallegro_primitives -lallegro_ttf -lallegro_font
+# ------------
+# Targets 
+# ------------
 default: $(PROJECT)
-%.o: %.c
-	$(CC) -c -I $(D_SRC) $(CFLAGS) $< -o  $@
 
-$(PROJECT): $(FILES_O)
-	$(CC) -I $(D_SRC) $(LFLAGS) $(FILES_O) -I/allegro5/addons/ -lallegro -lallegro_main -lallegro_image -lallegro_dialog -lallegro_primitives -lallegro_ttf -lallegro_font -o $@ -lm
+tests: test-$(PROJECT)
+
+check: test-$(PROJECT)
+	./test-$(PROJECT)
+
+%.o: %.c
+	$(CC) -c -I $(D_SRC) $(CFLAGS) $(INCS) $< -o $@ -lm 
+
+$(PROJECT): $(PROJECT_WITHOUT_TESTS_O)
+	$(CC) -I $(D_SRC) $(LFLAGS) $(PROJECT_WITHOUT_TESTS_O) -o  $@ $(ALLEGRO) 
+
+test-$(PROJECT): $(PROJECT_WITH_TESTS_O)
+	$(CC) -I $(D_SRC) $(LFLAGS) $(PROJECT_WITH_TESTS_O) -o $@ $(ALLEGRO) $(INCS) 
 
 .phony:	clean
 clean:
-	-$(RM) $(FILES_O) $(PROJECT)
+	-$(RM) $(PROJECT_WITH_TESTS_O) $(D_SRC)/main.o $(PROJECT) test-$(PROJECT)
+
