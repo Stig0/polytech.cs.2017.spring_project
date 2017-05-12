@@ -12,9 +12,6 @@ int main(int argc, char **argv)
 	ALLEGRO_BITMAP *bouncer = NULL;
 	ALLEGRO_BITMAP *image = NULL;
 	
-	int imageWidth = 0;
-	int imageHeight = 0;
-	bool redraw = true;
 	if (!al_init()) {
 		fprintf(stderr, "failed to initialize allegro!\n");
 		return -1;
@@ -86,8 +83,7 @@ int main(int argc, char **argv)
 	al_flip_display();
 	al_start_timer(timer);
 
-	int i=0, j=0, x=0, y = 0;//Переменные для циклов FOR
-	int randon_number = 0;   //Переменная отвечающая за рандомное распределение 
+	int x=0, y = 0;//Переменные для циклов FOR 
 	int a[100][100], b[100][100];//Две основные матрицы игры (их назначение описано в плане реализации проекта )
 	int number_of_neighbors = 0;//Счетчик количества соседей у каждой живой клетки 
 	int size_settings = 0; //Режим меню выбора размера матрицы(при size_settings=0 меню закрыто,при size_settings=1 меню открыто
@@ -133,7 +129,7 @@ int main(int argc, char **argv)
 		al_wait_for_event(event_queue, &ev);
 
 		if (ev.type == ALLEGRO_EVENT_TIMER) {   //Подключение таймера
-			redraw = true;
+			
 		}
 		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {  //Случай закрытия пользователем дисплея
 			break;
@@ -185,7 +181,7 @@ int main(int argc, char **argv)
 				{
 					if (b[x][y] == 1) {
 						al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(0, 0, 255));
-						redraw = true;
+						
 					}
 					else if (b[x][y] == 0) {
 						al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(255, 255, 255));
@@ -209,7 +205,7 @@ int main(int argc, char **argv)
 					{
 						if (b[x][y] == 1) {
 							al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(0, 0, 255));
-							redraw = true;
+							
 						}
 						else if (b[x][y] == 0) {
 							al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(255, 255, 255));
