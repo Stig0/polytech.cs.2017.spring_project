@@ -23,6 +23,10 @@ To rebuild everything from scratch, do the following:
 ````
 make clean
 ````
+To build tests:
+````
+make D_UNITY=../Unity
+````
 
 ## Authors
 * **Nikolaev Denis** - den11nik@yandex.ru
