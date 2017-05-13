@@ -25,7 +25,7 @@ make clean
 ````
 To build tests:
 ````
-make D_UNITY=../Unity
+make D_UNITY=../Unity check
 ````
 
 ## Authors
