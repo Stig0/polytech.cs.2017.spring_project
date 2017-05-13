@@ -40,10 +40,11 @@ void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, i
 		for (x = 1; x < size_of_matrix; x++)
 		{
 			if (b[x][y] == a[x][y]) d++;
+			
 
 		}
 	}
-	if (d >size_of_matrix*size_of_matrix) { d = 0; (*game_mode) = 0; }
+	if (d >size_of_matrix*size_of_matrix-2*size_of_matrix) { d = 0; (*game_mode) = 0; }
 
 	//Приравнивание текущей и предыдущей матриц
 	for (y = 1; y < size_of_matrix; y++) {
