@@ -12,7 +12,7 @@ RM  := rm -rf
 # Directories & Files
 # --------------------
 D_SRC    := ./src
-D_TESTS  := $(D_SRC)/test
+D_TESTS  := $(D_SRC)/tests
 D_UNITY  := 
 
 ENTRY_POINT := $(D_SRC)/main.c
