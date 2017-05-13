@@ -29,7 +29,7 @@ void knopka(int size_of_matrix, int *Game_on, int *size_settings,int *game_mode,
 		*/
 		else if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 680 && bouncer_x < 840)) {
 			clear(b);
-			*game_mode=0;
+			(*game_mode)=0;
 		}
 		/*Далее,действие,при нажатии на кнопку Menu:
 		Открытие стартового окна

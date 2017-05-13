@@ -107,6 +107,7 @@ int main(int argc, char **argv)
 				}
 
 			}
+			
 			if (game_window == 1) { //Начало прорисовки интерфейса игрового процесса 
 				image = al_load_bitmap("src/res/play_fon.jpg"); //Загрузка фона 
 				al_draw_bitmap(image, 0, 0, 0); //Прорисовка фона 
@@ -127,26 +128,22 @@ int main(int argc, char **argv)
 		*/
 		ALLEGRO_EVENT ev;//Инициализация события 
 		al_wait_for_event(event_queue, &ev);
-
+		
 		if (ev.type == ALLEGRO_EVENT_TIMER) { //Подключение таймера 
 
 		}
 		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) { //Случай закрытия пользователем дисплея 
 			break;
 		}
-		else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES || //Получение координат мыши от пользователя 
-			ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY) { //Координаты будут получены если мышь находится в игровом поле 
-			bouncer_x = ev.mouse.x;
-			bouncer_y = ev.mouse.y;
-			al_flush_event_queue(event_queue);
-		}
-
+		
 		/*Далее идет одна из самых важных частей кода-обработка полученных координат мыши .*/
 
-		if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) //Координаты обрабатываются при нажатии пользователем на экран 
+		else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) //Координаты обрабатываются при нажатии пользователем на экран 
 		{
-			count_of_clean = 5;
+			
+			count_of_clean = 99;
 			knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
+			
 
 			/*
 			Прорисовка меню настроек*/
@@ -173,6 +170,12 @@ int main(int argc, char **argv)
 			if (size_settings == 1) {
 				size_matrix(&size_of_matrix, bouncer_x, bouncer_y);
 			}
+		}
+		else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES || //Получение координат мыши от пользователя 
+			ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY) { //Координаты будут получены если мышь находится в игровом поле 
+			bouncer_x = ev.mouse.x;
+			bouncer_y = ev.mouse.y;
+			al_flush_event_queue(event_queue);
 		}
 		if (game_window == 1) {
 			//Прорисовка игровых ячеек 
@@ -216,16 +219,20 @@ int main(int argc, char **argv)
 				//Выполнение главного алгоритма игры 
 				int i = 0, m = 0;
 				for (i = 1; i < 20; ++i) {
-					if (count_of_clean == 5 * i)m = 1;
+					if ((count_of_clean == 5 * i) || (count_of_clean==99))m = 1;
+						al_flush_event_queue(event_queue);
 				}
 				if (m == 1) {
 					
 						main_algorithm(b, a, number_of_neighbors, size_of_matrix, &game_mode);
+						
+						
 
 				}
 			}
 
 		}
+		
 		//Следующая часть кода отвечает за красные и зеленые ячейки напротив размера поля 
 		if (game_window == 0) {
 			if (size_settings == 1) {
