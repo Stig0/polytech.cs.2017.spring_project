@@ -1,38 +1,41 @@
 #include "knopka.h"
 #include "lib.h"
 #include "functions.h"
+/**Обработка при нажатии на кнопки
+        Действие,при нажатии на кнопку Start:
+        Переход в режим многократных действий
+         Действие,при нажатии на кнопку Step:
+		Переход в режим однократного действия
+		 Действие,при нажатии на кнопку Stop:
+		Остановка игрового процесса
+		 Действие,при нажатии на кнопку Menu:
+		Открытие стартового окна
+
+*/
 void knopka(int size_of_matrix, int *Game_on, int *size_settings,int *game_mode, int *game_window, int *count_of_clean, int b[100][100], float bouncer_x, float bouncer_y)
  {
 
 	int randon_number = 0, i = 0, j = 0;
 	if ((*game_window) == 1) {
-		/*Далее,действие,при нажатии на кнопку Start:
-		Переход в режим многократных действий
-		*/
+
 		if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 180 && bouncer_x < 330)) {
 			(*game_mode) = 10;
 		}
-		/*Далее,действие,при нажатии на кнопку Step:
-		Переход в режим однократного действия
-		*/
+
 		else if (((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 340 && bouncer_x < 490))) {
 			(*game_mode) = 1;
 		}
-		/*Далее,действие,при нажатии на кнопку Stop:
-		Остановка игрового процесса
+		/*
 		*/
 		else if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 500 && bouncer_x < 670)) {
 			(*game_mode) = 3;
 		}
-		/*Далее,действие,при нажатии на кнопку Clear:
-		Обнуление матрицы b
-		*/
+
 		else if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 680 && bouncer_x < 840)) {
 			clear(b);
 			(*game_mode)=0;
 		}
-		/*Далее,действие,при нажатии на кнопку Menu:
-		Открытие стартового окна
+		/*
 		*/
 		else if ((bouncer_y > 525 && bouncer_y < 600) && (bouncer_x > 800 && bouncer_x < 1000)) {
 			(*game_window) = 0;
@@ -71,7 +74,7 @@ void knopka(int size_of_matrix, int *Game_on, int *size_settings,int *game_mode,
 				}
 			}
 		}
-		/*
+		/**
 		Далее идет проверка попадания пользователем в игровые ячейки ,если координаты мыши удовлетворяют
 		определенным условиям(пользователь попадает в игровую ячейку,связанную с матрицей b) ТО:
 		если элемент b был равен 0 ,то он становится равным 1
