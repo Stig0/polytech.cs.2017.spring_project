@@ -1,3 +1,10 @@
+
+/** @file size_matrix.c
+ *  @brief Файл содержит функцию,которая устанавливает размер матрицы
+ *
+ *
+    *@author Nikolaev Denis - den11nik@yandex.ru \n
+    *@author Puzko Danila - danilapuzko@mail.ru*/
 #include "size_matrix.h"
 /**  \fn void size_matrix(int *size_of_matrix, float bouncer_x, float bouncer_y)
         *Функция анализирует координаты нажатия мышью в режиме открытых настроек ,и изменяет размер матрицы

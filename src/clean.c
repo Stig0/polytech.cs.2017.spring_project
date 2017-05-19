@@ -1,5 +1,12 @@
+/** @file clean.c
+ *  @brief Функция очистки буферной матрицы
+ *
+ *
+    *@author Nikolaev Denis - den11nik@yandex.ru \n
+    *@author Puzko Danila - danilapuzko@mail.ru*/
 #include "clean.h"
-/**Привет
+/** \fn int clear(int b[100][100])
+Функция присваивает всем элементам матрицы b значения 0
 */
 int clear(int b[100][100]) {
 	int i, j = 0;

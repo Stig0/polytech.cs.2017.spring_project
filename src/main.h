@@ -1,15 +1,21 @@
-const float FPS = 60;//FPS
-const int SCREEN_W = 1000;//Ширина экрана
-const int SCREEN_H = 600;//Высота экрана
+const float FPS = 60;/// \var const float FPS FPS
+/** Ширина экрана*/
+const int SCREEN_W = 1000;
+  /** Высота экрана*/
+const int SCREEN_H = 600;
 const int BOUNCER_SIZE = 32;
 
 int clear(int b[100][100]);//Очистка матрицы b
-int size_of_matrix = 41;//Переменная ,отвечающая за размер матрицы
- float bouncer_x = 0.0;//Координата нажатия  оси х
- float bouncer_y = 0.0;//Координаты нажатия  оси у
- /* Переменная game_mode отвечает за игровой режим ,если
-    game_mode==1 режим шага.
-	game_mode==10 режим многократных действий.
+ /** Переменная ,отвечающая за размер матрицы*/
+int size_of_matrix = 41;
+ /** Координата нажатия  оси х*/
+ float bouncer_x = 0.0;
+ /**Координаты нажатия  оси у*/
+ float bouncer_y = 0.0;
+ /**
+    Переменная game_mode отвечает за игровой режим ,если
+    game_mode==1 режим шага. \n
+	game_mode==10 режим многократных действий. \n
 	game_mode==3 режим остановки.
  */
  int game_mode = 0;
@@ -17,7 +23,8 @@ int size_of_matrix = 41;//Переменная ,отвечающая за раз
  int planer(int b[100][100]);//Функции прорисовки различных фигур
  int rellay(int  b[100][100]);//Функции прорисовки различных фигур
  int Twin_Bees(int b[100][100]);//Функции прорисовки различных фигур
- int game_window = 0;//Переменная game_window отвечает за открытие определенного окна ,если game_window=0 - стартовое ,game_window=1 -игровое
+ /** int game_window Переменная game_window отвечает за открытие определенного окна ,если game_window=0 - стартовое ,game_window=1 -игровое*/
+ int game_window = 0;
  //Функция knopka обрабатывает координаты полученные при нажатии пользователем на экран в режиме игрового окна
  void knopka(int size_of_matrix,int *Game_on, int *size_settings,int *game_mode, int *game_window, int *count_of_clean, int b[100][100], float bouncer_x, float bouncer_y);
  //Функция size_matrix обрабатывает координаты полученные при нажатии пользователем на экран в режиме настрое размера поля
