@@ -10,7 +10,7 @@ TEST_GROUP(TestClean);
 
 TEST_GROUP_RUNNER(TestClean)
 {
-    RUN_TEST_CASE(TestClean, FuncionClean);
+    RUN_TEST_CASE(TestClean, FunctionClean);
 }
 
 TEST_SETUP(TestClean)
@@ -20,11 +20,11 @@ TEST_SETUP(TestClean)
 TEST_TEAR_DOWN(TestClean)
 {
 }
-/** \fn TEST(TestClean, FucntionClean)
+/** \fn TEST(TestClean, FunctionClean)
 Тестирование функции clean.
 Сравнивает две матрицы. Одна очищена вручную, вторая - с помощью функции clean.
 */
-TEST(TestClean, FuncionClean)
+TEST(TestClean, FunctionClean)
 {
 	int a[100][100], b[100][100];
 	int i=0, j=0;
