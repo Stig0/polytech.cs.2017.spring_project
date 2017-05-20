@@ -19,7 +19,7 @@
 
 Игрок не принимает прямого участия в игре, а лишь расставляет или генерирует начальную конфигурацию «живых» клеток, которые затем взаимодействуют согласно правилам уже без его участия (он является наблюдателем).
 ### Интерфейс
-![Image alt](https://github.com/Stig0/polytech.cs.2017.spring_project/tree/master/src/res/play_fon.jpg)
+![Image alt](https://github.com/Stig0/polytech.cs.2017.spring_project/raw/master/src/res/play_fon.jpg)
 ### Структура проекта
 Организация проекта:
 
