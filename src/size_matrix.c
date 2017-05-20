@@ -8,7 +8,10 @@
 #include "size_matrix.h"
 /**  \fn void size_matrix(int *size_of_matrix, float bouncer_x, float bouncer_y)
         *Функция анализирует координаты нажатия мышью в режиме открытых настроек ,и изменяет размер матрицы
-
+    \param int *size_of_matrix -указатель на размер матрицы
+    \param float bouncer_x  -координаты по x
+    \param float bouncer_y -координаты по y
+    \return это void-функция
 */
 void size_matrix(int *size_of_matrix, float bouncer_x, float bouncer_y) {
 	if ( (bouncer_y > 370 && bouncer_y < 405) && (bouncer_x > 640 && bouncer_x < 850)) {
