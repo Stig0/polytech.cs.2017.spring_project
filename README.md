@@ -56,7 +56,7 @@ make html
 ````
 
 ## Авторы
-* **Николаев Денис(тупой)** - den11nik@yandex.ru
-* **Пузько Данила(тоже тупой)** - danilapuzko@mail.ru
+* **Николаев Денис** - den11nik@yandex.ru
+* **Пузько Данила** - danilapuzko@mail.ru
 ## Лицензия
 Этот проект лицензирован под MIT License - смотри [LICENSE](LICENSE) файл для подробностей
