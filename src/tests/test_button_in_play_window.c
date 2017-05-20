@@ -1,3 +1,7 @@
+/** @file test_button_in_play_window.c
+* @brief Тест кнопок в игре
+*/
+
 #include "unity.h"
 #include "unity_fixture.h"
 #include "knopka.h"
@@ -22,7 +26,10 @@ TEST_SETUP(TestButtonInPlayWindow)
 TEST_TEAR_DOWN(TestButtonInPlayWindow)
 {
 }
-
+/** \fn TEST(TestButtonInPlayWindow, buttonstart)
+Тестирование кнопки Start.
+Сравнивает ожидаемую переменную game_mode с получившейся.
+*/
 TEST(TestButtonInPlayWindow, buttonstart)
 {
 	int a[100][100], b[100][100];
@@ -35,6 +42,10 @@ TEST(TestButtonInPlayWindow, buttonstart)
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean,b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT(10, game_mode);
 }
+/** \fn TEST(TestButtonInPlayWindow, buttonstep)
+Тестирование кнопки Step.
+Сравнивает ожидаемую переменную game_mode с получившейся.
+*/
 TEST(TestButtonInPlayWindow, buttonstep)
 {
 	int a[100][100], b[100][100];
@@ -47,6 +58,10 @@ TEST(TestButtonInPlayWindow, buttonstep)
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT(1, game_mode);
 }
+/** \fn TEST(TestButtonInPlayWindow, buttonstop)
+Тестирование кнопки Stop.
+Сравнивает ожидаемую переменную game_mode с получившейся.
+*/
 TEST(TestButtonInPlayWindow, buttonstop)
 {
 	int a[100][100], b[100][100];
@@ -59,6 +74,10 @@ TEST(TestButtonInPlayWindow, buttonstop)
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT(3, game_mode);
 }
+/** \fn TEST(TestButtonInPlayWindow, buttonclean)
+Тестирование кнопки Clean.
+Сравнивает две матрица, одна из которых очищена вручную, вторая - с помощью функции clean.
+*/
 TEST(TestButtonInPlayWindow, buttonclean)
 {
 	int a[100][100], b[100][100];
@@ -76,6 +95,10 @@ TEST(TestButtonInPlayWindow, buttonclean)
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT_ARRAY(a, b, 10000);
 }
+/** \fn TEST(TestButtonInPlayWindow, buttonmenu)
+Тестирование кнопки Menu.
+Сравнивает ожидаемые переменные game_mode и count_of_clean с получившимися.
+*/
 TEST(TestButtonInPlayWindow, buttonmenu)
 {
 	int a[100][100], b[100][100];

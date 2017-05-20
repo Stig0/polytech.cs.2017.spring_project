@@ -1,3 +1,6 @@
+/** @file test_main_algorithm.c
+* @brief Тест главного алгоритма игры
+*/
 #include "functions.h"
 #include "unity.h"
 #include "unity_fixture.h"
@@ -18,7 +21,10 @@ TEST_SETUP(TestMainAlgorithm)
 TEST_TEAR_DOWN(TestMainAlgorithm)
 {
 }
-
+/** \fn TEST(TestMainAlgorithm, mainalgorithm1)
+Тестирование главного алгоритма.
+Сравнивает две матрицы. Шаг(ход) в первой матрице сделан вручную, во второй - с помощью тестируемого алгоритма.
+*/
 TEST(TestMainAlgorithm, mainalgorithm1)
 {
 	int a[100][100], b[100][100], c[100][100];
@@ -42,7 +48,9 @@ TEST(TestMainAlgorithm, mainalgorithm1)
 	c[3][2]=1;
 	TEST_ASSERT_EQUAL_INT_ARRAY(a, c, 10000);
 }
-
+/** \fn TEST(TestMainAlgorithm, mainalgorithm2)
+Аналогичный первому тест. Сравнивается шаг с иными начальными положениями "живых" клеток.
+*/
 TEST(TestMainAlgorithm, mainalgorithm2)
 {
 	int a[100][100], b[100][100], c[100][100];
@@ -65,7 +73,9 @@ TEST(TestMainAlgorithm, mainalgorithm2)
 	c[3][4]=1;
 	TEST_ASSERT_EQUAL_INT_ARRAY(a, c, 10000);
 }
-
+/** \fn TEST(TestMainAlgorithm, mainalgorithm3)
+Аналогичный первому тест. Сравнивается шаг с иными начальными положениями "живых" клеток.
+*/
 TEST(TestMainAlgorithm, mainalgorithm3)
 {
 	int a[100][100], b[100][100], c[100][100];

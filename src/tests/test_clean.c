@@ -1,3 +1,6 @@
+/** @file test_clean.c
+* @brief Тест функции clean
+*/
 #include "unity.h"
 #include "unity_fixture.h"
 #include "clean.h"
@@ -17,7 +20,10 @@ TEST_SETUP(TestClean)
 TEST_TEAR_DOWN(TestClean)
 {
 }
-
+/** \fn TEST(TestClean, FucntionClean)
+Тестирование функции clean.
+Сравнивает две матрицы. Одна очищена вручную, вторая - с помощью функции clean.
+*/
 TEST(TestClean, FuncionClean)
 {
 	int a[100][100], b[100][100];

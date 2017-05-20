@@ -1,3 +1,6 @@
+/** @file test_play_object.c
+* @brief Тест кнопок, предлагающих начальные положения "живых" клеток (Planer, Rellay и TwinBees)
+*/
 #include "functions.h"
 #include "unity.h"
 #include "unity_fixture.h"
@@ -20,8 +23,11 @@ TEST_TEAR_DOWN(TestPlayObject)
 }
 
 
-
-TEST(TestPlayObject, TestPlaner )
+/** \fn TEST(TestPlayObject, TestPlaner)
+Тестирование кнопки Planer.
+Сравнивает две матрицы, в одной из которых нужные "живые" клетки расставлены вручную, а в другой - с помощью функции.
+*/
+TEST(TestPlayObject, TestPlaner)
 {
 	int  b[100][100], c[100][100];
 	int i, j = 0, number=0, game_mode=1;
@@ -40,8 +46,11 @@ TEST(TestPlayObject, TestPlaner )
 	planer(c);
 	TEST_ASSERT_EQUAL_INT_ARRAY(b, c, 10000);
 }
-
-TEST(TestPlayObject, TestRellay )
+/** \fn TEST(TestPlayObject, TestRellay)
+Тестирование кнопки Rellay.
+Сравнивает две матрицы, в одной из которых нужные "живые" клетки расставлены вручную, а в другой - с помощью функции.
+*/
+TEST(TestPlayObject, TestRellay)
 {
 	int  b[100][100], c[100][100];
 	int i, j = 0, number=0, game_mode=1;
@@ -97,7 +106,11 @@ TEST(TestPlayObject, TestRellay )
 	rellay(c);
 	TEST_ASSERT_EQUAL_INT_ARRAY(b, c, 10000);
 }
-TEST(TestPlayObject, TestTwinBees )
+/** \fn TEST(TestPlayObject, TestTwinBees)
+Тестирование кнопки TwinBees.
+Сравнивает две матрицы, в одной из которых нужные "живые" клетки расставлены вручную, а в другой - с помощью функции.
+*/
+TEST(TestPlayObject, TestTwinBees)
 {
 	int  b[100][100], c[100][100];
 	int i, j = 0, number=0, game_mode=1;

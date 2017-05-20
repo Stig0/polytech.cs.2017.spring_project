@@ -1,4 +1,6 @@
-
+/** @file runner.c
+* @brief Функция запуска всех тестов
+*/
 #include "unity.h"
 #include "unity_fixture.h"
 

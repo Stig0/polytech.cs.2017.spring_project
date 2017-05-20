@@ -1,3 +1,6 @@
+/** @file test_button_in_start_window.c
+* @brief Тест кнопок в меню
+*/
 #include "unity.h"
 #include "unity_fixture.h"
 #include "knopka.h"

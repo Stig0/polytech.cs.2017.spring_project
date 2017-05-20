@@ -1,3 +1,6 @@
+/** @file test_size_matrix.c
+* @brief Тест функции size_matrix
+*/
 #include "unity.h"
 #include "unity_fixture.h"
 #include "size_matrix.h"
@@ -16,7 +19,10 @@ TEST_SETUP(TestSizeMatrix)
 TEST_TEAR_DOWN(TestSizeMatrix)
 {
 }
-
+/** \fn TEST(TestSizeMatrix, sizematrix)
+Тестирование функции size_matrix.
+4 теста с разными начальными координатами. Сравниает ожидаемую и получвшуюся переменную size_of_matrix.
+*/
 TEST(TestSizeMatrix, sizematrix)
 {
 	int size_of_matrix=0;
