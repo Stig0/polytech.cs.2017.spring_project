@@ -95,7 +95,7 @@ int planer(int b[100][100])
 
 	return b[100][100];
 }
-/** \fn planer(int b[100][100])
+/** \fn random(int b[100][100], int size_of_matrix)
 Функция присваивающая определенные значения матрице b для отрисовки фигуры planer
 \param int b[100][100] буферная матрица
 \param int size_of_matrix размер матрицы
