@@ -2,8 +2,8 @@
  *  @brief Файл содержит различные функции проекта
  *
  *
-    *@author Nikolaev Denis - den11nik@yandex.ru \n
-    *@author Puzko Danila - danilapuzko@mail.ru*/
+	*@author Nikolaev Denis - den11nik@yandex.ru \n
+	*@author Puzko Danila - danilapuzko@mail.ru*/
 #include "lib.h"
 #include "functions.h"
 int clear(int b[100][100]);
@@ -18,18 +18,18 @@ int clear(int b[100][100]);
 и массив 2 с данными после первого шага , экран связан с массивом 2  .
 После этого элементы массива 1 заменят на элементы  массива 2
 Цикл будет повторяться при включенной кнопке «Старт»;
-    \param int b[100][100] -буферная матрица
-    \param int a[100][100] -основная матрица
-    \param int number_of_neighbors -число соседей
-    \param int size_of_matrix -размер матрицы
-    \param int *game_mode -указатель на игровой режим
-    \return это void-функция
+	\param int b[100][100] -буферная матрица
+	\param int a[100][100] -основная матрица
+	\param int number_of_neighbors -число соседей
+	\param int size_of_matrix -размер матрицы
+	\param int *game_mode -указатель на игровой режим
+	\return это void-функция
 */
-void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, int size_of_matrix,int *game_mode) {
-	int  i = 0, j = 0,x=0,y=0;
+void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, int size_of_matrix, int *game_mode) {
+	int  i = 0, j = 0, x = 0, y = 0;
 
 	for (j = 1; j < size_of_matrix; j++) {
-		for (i = 1; i <size_of_matrix; i++) {
+		for (i = 1; i < size_of_matrix; i++) {
 			//Поиск живых клеток,среди 8 соседей
 			if (b[i - 1][j - 1] == 1) number_of_neighbors++;
 			if (b[i][j - 1] == 1) number_of_neighbors++;
@@ -68,7 +68,7 @@ void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, i
 
 		}
 	}
-	if (d >size_of_matrix*size_of_matrix-2*size_of_matrix) { d = 0; (*game_mode) = 0; }
+	if (d > size_of_matrix*size_of_matrix - 2 * size_of_matrix) { d = 0; (*game_mode) = 0; }
 
 	//Приравнивание текущей и предыдущей матриц
 	for (y = 1; y < size_of_matrix; y++) {
@@ -93,6 +93,54 @@ int planer(int b[100][100])
 	b[2][3] = 1;
 	b[3][3] = 1;
 
+	return b[100][100];
+}
+/** \fn planer(int b[100][100])
+Функция присваивающая определенные значения матрице b для отрисовки фигуры planer
+\param int b[100][100] буферная матрица
+\param int size_of_matrix размер матрицы
+\return  буферную матрицу со случайными элементами
+
+*/
+int random(int b[100][100], int size_of_matrix)
+{
+	int randon_number = 0, i = 0, j = 0;;
+	srand((unsigned)time(NULL));
+	for (j = 1; j < size_of_matrix; j++) {
+		for (i = 1; i < size_of_matrix; i++) {
+			randon_number = rand() % 2;
+			b[i][j] = randon_number;
+		}
+	}
+	return b[100][100];
+}
+/** \fn int blue_or_white(int b[100][100],int size_of_matrix, float bouncer_x, float bouncer_y)
+{
+Функция присваивающая определенные значения матрице b для отрисовки фигуры rellay
+\param int b[100][100] буферная матрица
+\param int size_of_matrix размер матрицы
+\param float bouncer_x  -координаты по x
+\param float bouncer_y -координаты по y
+\return  буферную матрицу с определенными элементами
+*/
+int blue_or_white(int b[100][100], int size_of_matrix, float bouncer_x, float bouncer_y)
+{
+	int x, y;
+	for (y = 1; y < size_of_matrix; y++) {
+		if ((bouncer_y > 100 - 160 / size_of_matrix + (400 / size_of_matrix) * y) && (bouncer_y < 100 + 160 / size_of_matrix + (400 / size_of_matrix) * y))
+			for (x = 1; x < size_of_matrix; x++)
+			{
+				if ((bouncer_x > 320 - 160 / size_of_matrix + (400 / size_of_matrix) * x) && (bouncer_x < 320 + 160 / size_of_matrix + (400 / size_of_matrix) * x)) {
+					if (b[x][y] == 1) {
+						b[x][y] = 0;
+					}
+					else
+					{
+						b[x][y] = 1;
+					}
+				}
+			}
+	}
 	return b[100][100];
 }
 /** \fn int rellay(int b[100][100])
@@ -148,13 +196,11 @@ int rellay(int b[100][100])
 	return b[100][100];
 }
 
-
 /** \fn int Twin_Bees(int b[100][100])
 Функция присваивающая определенные значения матрице b для отрисовки фигуры Twin_Bees
   \param int b[100][100] буферная матрица
    \return  буферную матрицу с определенными элементами
 */
-
 int Twin_Bees(int b[100][100])
 {
 	b[7][12] = 1;
@@ -205,7 +251,5 @@ int Twin_Bees(int b[100][100])
 	b[35][12] = 1;
 	b[34][13] = 1;
 	b[35][13] = 1;
-
-
 	return b[100][100];
 }
