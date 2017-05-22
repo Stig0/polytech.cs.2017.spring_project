@@ -1,3 +1,6 @@
+/** @file functions.h
+	*@author Nikolaev Denis - den11nik@yandex.ru \n
+	*@author Puzko Danila - danilapuzko@mail.ru*/
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, int size_of_matrix, int *game_mode);

@@ -1,3 +1,6 @@
+/** @file knopka.h
+	*@author Nikolaev Denis - den11nik@yandex.ru \n
+	*@author Puzko Danila - danilapuzko@mail.ru*/
 #ifndef KNOPKA_H
 #define KNOPKA_H
 int clear(int b[100][100]);

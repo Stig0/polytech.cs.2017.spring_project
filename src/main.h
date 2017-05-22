@@ -1,3 +1,6 @@
+/** @file main.h
+	*@author Nikolaev Denis - den11nik@yandex.ru \n
+	*@author Puzko Danila - danilapuzko@mail.ru*/
 #ifndef MAIN_H
 #define MAIN_H
 #define SIZE 100
