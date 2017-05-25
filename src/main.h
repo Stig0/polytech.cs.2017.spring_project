@@ -9,7 +9,10 @@ const float FPS = 60;//const float FPS FPS
 const int SCREEN_W = 1000;
 /** Высота экрана*/
 const int SCREEN_H = 600;
-int a[SIZE][SIZE], b[SIZE][SIZE];
+/**Основная матрица*/
+int a[SIZE][SIZE];
+/**Буферная матрица*/
+int b[SIZE][SIZE];
 const int BOUNCER_SIZE = 32;
 int clear(int b[100][100]);//Очистка матрицы b
 /** Переменная ,отвечающая за размер матрицы*/
@@ -25,7 +28,9 @@ float bouncer_y = 0.0;
    game_mode==3 режим остановки.
 */
 int game_mode = 0;
-int size_settings = 0; //Режим меню выбора размера матрицы(при size_settings=0 меню закрыто,при size_settings=1 меню открыто
+/**Режим меню выбора размера матрицы(при size_settings=0 меню закрыто,при size_settings=1 меню открыто*/
+int size_settings = 0;
+/**Game_on = 1 игра активна ,Game_on = 0 игра выключается */
 int Game_on = 1;
 int count_of_clean = 99;
 int planer(int b[100][100]);//Функции прорисовки различных фигур

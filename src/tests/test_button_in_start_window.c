@@ -24,7 +24,10 @@ TEST_SETUP(TestButtonInStartWindow)
 TEST_TEAR_DOWN(TestButtonInStartWindow)
 {
 }
-
+/** \fn TEST(TestButtonInStartWindow, buttonplay)
+Тестирование кнопки Играть в режиме стартового окна .
+.
+*/
 TEST(TestButtonInStartWindow, buttonplay)
 {
 	int a[100][100], b[100][100];
@@ -38,6 +41,10 @@ TEST(TestButtonInStartWindow, buttonplay)
 	TEST_ASSERT_EQUAL_INT(0, size_settings);
 	TEST_ASSERT_EQUAL_INT(99, count_of_clean);
 }
+/** \fn TEST(TestButtonInStartWindow, buttonexit)
+Тестирование кнопки Выход в режиме стартового окна .
+.
+*/
 TEST(TestButtonInStartWindow, buttonexit)
 {
 	int a[100][100], b[100][100];
