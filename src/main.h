@@ -16,7 +16,7 @@ int b[SIZE][SIZE];
 const int BOUNCER_SIZE = 32;
 int clear(int b[100][100]);//Очистка матрицы b
 /** Переменная ,отвечающая за размер матрицы*/
-int size_of_matrix = 41;
+int size_of_matrix = 99;
 /** Координата нажатия  оси х*/
 float bouncer_x = 0.0;
 /**Координаты нажатия  оси у*/

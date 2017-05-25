@@ -1,23 +1,22 @@
 /** @file main.c
- *  @brief Главная функция проекта
- *
- *  Главная функция проекта.В данной функции подключается библиотека Allegro5 и различные ее пакеты.Функция отвечает за работу дисплея .
- *  Работа программы строится на бесконечном цикле ,в процессе которого прорисовываютя различные элементы дисплея.
-	*@author Nikolaev Denis - den11nik@yandex.ru \n
-	*@author Puzko Danila - danilapuzko@mail.ru*/
-	/** \fn int main(int argc, char **argv)
-	Работа программы строится на бесконечном цикле ,в процессе которого прорисовываютя различные элементы дисплея.
-	##Игровой цикл можно разделить на 3 части:
-	###Первая часть:
-	** *Эта часть представляет собой набор команд для отрисовки игрового поля (В ней загружается игровой фон,кнопки )*
-	###Вторая часть:
-	** *Эта часть отвечает за подключение события взаимодействия с пользователем,в данном случае ввод пользователем данных при помощи мыши .*
-	** *Если игровая мышь находится в игровом поле и на ней нажимается кнопка,программа получает координаты и отправляет их в функцию knopka*
-	###Третья часть:
-	** *Эта часть отвечает за отрисовку игрового поля в зависимости от состояния матрицы b*
-	 *
-
-	 */
+*  @brief Главная функция проекта
+*
+*  Главная функция проекта.В данной функции подключается библиотека Allegro5 и различные ее пакеты.Функция отвечает за работу дисплея .
+*  Работа программы строится на бесконечном цикле ,в процессе которого прорисовываютя различные элементы дисплея.
+*@author Nikolaev Denis - den11nik@yandex.ru \n
+*@author Puzko Danila - danilapuzko@mail.ru*/
+/** \fn int main(int argc, char **argv)
+Работа программы строится на бесконечном цикле ,в процессе которого прорисовываютя различные элементы дисплея.
+##Игровой цикл можно разделить на 3 части:
+###Первая часть:
+** *Эта часть представляет собой набор команд для отрисовки игрового поля (В ней загружается игровой фон,кнопки )*
+###Вторая часть:
+** *Эта часть отвечает за подключение события взаимодействия с пользователем,в данном случае ввод пользователем данных при помощи мыши .*
+** *Если игровая мышь находится в игровом поле и на ней нажимается кнопка,программа получает координаты и отправляет их в функцию knopka*
+###Третья часть:
+** *Эта часть отвечает за отрисовку игрового поля в зависимости от состояния матрицы b*
+*
+*/
 
 #include "lib.h"
 #include "main.h"
@@ -92,14 +91,15 @@ int main(int argc, char **argv)
 	al_flip_display();
 	al_start_timer(timer);
 	int x = 0, y = 0;//Переменные для циклов FOR
-	//Две основные матрицы игры (их назначение описано в плане реализации проекта )
+					 //Две основные матрицы игры (их назначение описано в плане реализации проекта )
 	int number_of_neighbors = 0;//Счетчик количества соседей у каждой живой клетки
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	clear(b);
 	while (Game_on == 1)
 	{
 		count_of_clean++; //Процесс очистки экрана,
-		if (count_of_clean == 100) { //при котором все ненужные элементы удаляются ,
+		if (count_of_clean == 100|| count_of_clean == 25) {
+			al_clear_to_color(al_map_rgb(0, 0, 0));//при котором все ненужные элементы удаляются ,
 			count_of_clean = 0; // а нужные прорисовываются снова
 			if (game_window == 0) { //Прорисовка стартового окна
 				image = al_load_bitmap("res/fon_menu.jpg"); //Загрузка фона для стартового окна
@@ -122,6 +122,19 @@ int main(int argc, char **argv)
 				al_draw_rectangle(145, 500, 260, 545, al_map_rgb(255, 0, 0), 0);
 				al_draw_rectangle(285, 500, 395, 545, al_map_rgb(255, 0, 0), 0);
 				al_draw_rectangle(425, 500, 580, 545, al_map_rgb(255, 0, 0), 0);
+				for (y = 1; y < size_of_matrix; y++) {
+
+					for (x = 1; x < size_of_matrix; x++)
+					{
+						if (b[x][y] == 1) {
+							al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(0, 0, 255));
+						}
+						else if (b[x][y] == 0) {
+							al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(255, 255, 255));
+						}
+						else {}
+					}
+				}
 			}
 			else { continue; }
 		}
@@ -131,7 +144,8 @@ int main(int argc, char **argv)
 		*/
 		ALLEGRO_EVENT ev;//Инициализация события
 		al_wait_for_event(event_queue, &ev);
-
+		bouncer_x = ev.mouse.x;
+		bouncer_y = ev.mouse.y;
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) { //Случай закрытия пользователем дисплея
 			break;
 		}
@@ -143,6 +157,7 @@ int main(int argc, char **argv)
 			bouncer_y = ev.mouse.y;
 			count_of_clean = 99;
 			knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
+			al_flush_event_queue(event_queue);
 			/*
 			Прорисовка меню настроек*/
 			if (game_window == 0) {
@@ -168,57 +183,33 @@ int main(int argc, char **argv)
 		}
 		else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES || //Получение координат мыши от пользователя
 			ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY) { //Координаты будут получены если мышь находится в игровом поле
-			bouncer_x = ev.mouse.x;
-			bouncer_y = ev.mouse.y;
+		
 			al_flush_event_queue(event_queue);
 		}
 
 		if (game_window == 1) {
 			//Прорисовка игровых ячеек
-			for (y = 1; y < size_of_matrix; y++) {
-
-				for (x = 1; x < size_of_matrix; x++)
-				{
-					if (b[x][y] == 1) {
-						al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(0, 0, 255));
-					}
-					else if (b[x][y] == 0) {
-						al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(255, 255, 255));
-					}
-					else {}
-				}
-			}
+			
 			//Остановка игрового цикла
-			if (game_mode == 3)
+			 if (game_mode == 3)
 			{
 				game_mode = 0;
 			}
 			else if (game_mode == 10 || game_mode == 1)
 			{
 				if (game_mode == 1) { game_mode = 0; }
-
-				//Прорисовка игровых ячеек
-				for (y = 1; y < size_of_matrix; y++) {
-					for (x = 1; x < size_of_matrix; x++)
-					{
-						if (b[x][y] == 1) {
-							al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(0, 0, 255));
-						}
-						else if (b[x][y] == 0) {
-							al_draw_filled_ellipse(320 + (400 / size_of_matrix) * x, 100 + (400 / size_of_matrix) * y, 160 / size_of_matrix, 160 / size_of_matrix, al_map_rgb(255, 255, 255));
-						}
-						else {}
-					}
-				}
-				//Выполнение главного алгоритма игры
 				int i = 0, m = 0;
-				for (i = 1; i < 20; ++i) {
-					if ((count_of_clean == 5 * i) || (count_of_clean == 99)) { m = 1; }
-					else {}
-					al_flush_event_queue(event_queue);
+				for (i = 1; i < 10; ++i) {
+					if ((count_of_clean == 10 * i) || (count_of_clean == 99)) { m = 1; }
+					
 
 				}
 				if (m == 1) {
+				//Прорисовка игровых ячеек
+				
+				//Выполнение главного алгоритма игры
+				
+				
 					main_algorithm(b, a, number_of_neighbors, size_of_matrix, &game_mode);
 				}
 
