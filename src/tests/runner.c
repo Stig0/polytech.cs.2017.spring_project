@@ -1,5 +1,7 @@
 /** @file runner.c
 * @brief Функция запуска всех тестов
+*@author Nikolaev Denis - den11nik@yandex.ru \n
+*@author Puzko Danila - danilapuzko@mail.ru
 */
 #include "unity.h"
 #include "unity_fixture.h"

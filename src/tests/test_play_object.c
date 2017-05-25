@@ -1,5 +1,7 @@
 /** @file test_play_object.c
 * @brief Тест кнопок, предлагающих начальные положения "живых" клеток (Planer, Rellay и TwinBees)
+*@author Nikolaev Denis - den11nik@yandex.ru \n
+    *@author Puzko Danila - danilapuzko@mail.ru
 */
 #include "functions.h"
 #include "unity.h"

@@ -1,5 +1,7 @@
 /** @file test_button_in_play_window.c
 * @brief Тест кнопок в игре
+*@author Nikolaev Denis - den11nik@yandex.ru \n
+*@author Puzko Danila - danilapuzko@mail.ru
 */
 
 #include "unity.h"
@@ -90,8 +92,8 @@ TEST(TestButtonInPlayWindow, buttonclean)
 			a[i][j] = 0;
 		}
 	}
-	bouncer_x = 800.0;
-	bouncer_y = 40.0;
+	bouncer_x = 681.0;
+	bouncer_y = 79.0;
 	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
 	TEST_ASSERT_EQUAL_INT_ARRAY(a, b, 10000);
 }

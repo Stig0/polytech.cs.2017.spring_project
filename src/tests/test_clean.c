@@ -1,5 +1,7 @@
 /** @file test_clean.c
 * @brief Тест функции clean
+*@author Nikolaev Denis - den11nik@yandex.ru \n
+    *@author Puzko Danila - danilapuzko@mail.ru
 */
 #include "unity.h"
 #include "unity_fixture.h"

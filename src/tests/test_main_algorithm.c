@@ -1,5 +1,7 @@
 /** @file test_main_algorithm.c
 * @brief Тест главного алгоритма игры
+*@author Nikolaev Denis - den11nik@yandex.ru \n
+    *@author Puzko Danila - danilapuzko@mail.ru
 */
 #include "functions.h"
 #include "unity.h"
