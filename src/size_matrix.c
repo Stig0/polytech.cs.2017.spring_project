@@ -1,4 +1,3 @@
-
 /** @file size_matrix.c
  *  @brief Файл содержит функцию,которая устанавливает размер матрицы
  *
@@ -29,5 +28,4 @@ void size_matrix(int *size_of_matrix, float bouncer_x, float bouncer_y) {
 	else if (  (bouncer_y > 465 && bouncer_y < 495) && (bouncer_x > 640 && bouncer_x < 850)) {
 		(*size_of_matrix) = 41;
 	}
-	else {}
 }

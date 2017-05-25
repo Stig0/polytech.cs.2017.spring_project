@@ -27,7 +27,7 @@ int clear(int b[100][100]);
 */
 void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, int size_of_matrix, int *game_mode) {
 	int  i = 0, j = 0, x = 0, y = 0;
-
+	assert(game_mode!=NULL);
 	for (j = 1; j < size_of_matrix; j++) {
 		for (i = 1; i < size_of_matrix; i++) {
 			//Поиск живых клеток,среди 8 соседей

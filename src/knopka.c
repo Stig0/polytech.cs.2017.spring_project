@@ -37,6 +37,11 @@
 
 void knopka(int size_of_matrix, int *Game_on, int *size_settings, int *game_mode, int *game_window, int *count_of_clean, int b[100][100], float bouncer_x, float bouncer_y)
 {
+	assert(game_mode!=NULL);
+	assert(game_window!=NULL);
+	assert(Game_on!=NULL);
+	assert(size_settings!=NULL);
+	assert(count_of_clean!=NULL);
 	if ((*game_window) == 1) {
 		if ((bouncer_y > 0 && bouncer_y < 80) && (bouncer_x > 180 && bouncer_x < 330)) {
 			(*game_mode) = 10;
