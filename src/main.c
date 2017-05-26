@@ -99,7 +99,6 @@ int main(int argc, char **argv)
 	al_flip_display();
 	al_start_timer(timer);
 	int x = 0, y = 0;//Переменные для циклов FOR
-	int i = 0, m = 0;			 //Две основные матрицы игры (их назначение описано в плане реализации проекта )
 	int number_of_neighbors = 0;//Счетчик количества соседей у каждой живой клетки
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	clear(b);
