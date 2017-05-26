@@ -30,8 +30,6 @@ int main(int argc, char **argv)
 	ALLEGRO_BITMAP *bouncer = NULL;
 	ALLEGRO_BITMAP *image1 = NULL;
 	ALLEGRO_BITMAP *image3 = NULL;
-	ALLEGRO_BITMAP *image4 = NULL;
-	ALLEGRO_BITMAP *image5 = NULL;
 	if (!al_init()) {
 		fprintf(stderr, "failed to initialize allegro!\n");
 		return -1;
@@ -64,9 +62,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 	image1 = al_load_bitmap("res/fon_menu.jpg");
-	image3= al_load_bitmap("res/play_fon.jpg");
-	image4 = al_load_bitmap("res/menu_op.jpg");
-	image5 = al_load_bitmap("res/fon_menu.jpg");
+	image3 = al_load_bitmap("res/play_fon.jpg");
 	if (!image1) {
 		al_show_native_message_box(display, "Error", "Error", "Failed to load image!",
 			NULL, ALLEGRO_MESSAGEBOX_ERROR);
@@ -108,22 +104,24 @@ int main(int argc, char **argv)
 			al_clear_to_color(al_map_rgb(0, 0, 0));//при котором все ненужные элементы удаляются ,
 			count_of_clean = 0; // а нужные прорисовываются снова
 			if (game_window == 0) { //Прорисовка стартового окна
-				
+
 				al_draw_bitmap(image1, 0, 0, 0); //Прорисовка фона для стартового окна
 			}
 			else if (game_window == 1) { //Начало прорисовки интерфейса игрового процесса
 				al_draw_bitmap(image3, 0, 0, 0); //Прорисовка фона
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 10, 500, 0, "Random");
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 150, 500, 0, "Planer");
-				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 290, 500, 0, "Rellay");
-				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 430, 500, 0, "Twin Bees");
+				if (size_of_matrix > 20) {
+					al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 290, 500, 0, "Rellay");
+					al_draw_rectangle(285, 500, 395, 545, al_map_rgb(255, 0, 0), 0);
+				}
+				if (size_of_matrix > 30) {
+					al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 430, 500, 0, "Twin Bees");
+					al_draw_rectangle(425, 500, 580, 545, al_map_rgb(255, 0, 0), 0);
+				}
 				al_draw_rectangle(5, 500, 130, 545, al_map_rgb(255, 0, 0), 0);
 				al_draw_rectangle(145, 500, 260, 545, al_map_rgb(255, 0, 0), 0);
-				al_draw_rectangle(285, 500, 395, 545, al_map_rgb(255, 0, 0), 0);
-				al_draw_rectangle(425, 500, 580, 545, al_map_rgb(255, 0, 0), 0);
-
 				for (y = 1; y < size_of_matrix; y++) {
-
 					for (x = 1; x < size_of_matrix; x++)
 					{
 						if (buffer_matrix[x][y] == 1) {
@@ -136,6 +134,7 @@ int main(int argc, char **argv)
 					}
 				}
 			}
+			else {}
 		}
 		//Конец процесса прорисовки
 		/*Далее программа обрабатывает входяшие команды от пользователя
@@ -143,7 +142,7 @@ int main(int argc, char **argv)
 		*/
 		ALLEGRO_EVENT ev;//Инициализация события
 		al_wait_for_event(event_queue, &ev);
-		
+
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) { //Случай закрытия пользователем дисплея
 			break;
 		}
@@ -163,40 +162,34 @@ int main(int argc, char **argv)
 					size_matrix(&size_of_matrix, bouncer_x, bouncer_y);
 				}
 				if ((bouncer_y > 390 && bouncer_y < 430) && (bouncer_x > 420 && bouncer_x < 600)) {//Описание нажатия кнопки Настройки
-					al_clear_to_color(al_map_rgb(0, 0, 0));
 					if (size_settings == 0) {
 						size_settings = 1;
-						
-						al_draw_bitmap(image4, 0, 0, 0);
 					}
 					else if (size_settings == 1) {
 						size_settings = 0;
-						al_draw_bitmap(image5, 0, 0, 0);
 					}
 					else {}
 				}
 
 			}
 		}
-		
+		else {}
 		if (game_window == 1) {
 			//Остановка игрового цикла
-			 if (game_mode == 3)
+			if (game_mode == 3)
 			{
 				game_mode = 0;
 			}
 			else if (game_mode == 10 || game_mode == 1)
 			{
 				if (game_mode == 1) { game_mode = 0; }
-			
-				
-				if (count_of_clean==79) {
+				if (count_of_clean == 79) {
 					main_algorithm(buffer_matrix, main_matrix, number_of_neighbors, size_of_matrix, &game_mode);
 					al_flush_event_queue(event_queue);
 					al_flip_display();
 				}
 			}
-			else{}
+			else {}
 		}
 		//Следующая часть кода отвечает за красные и зеленые ячейки напротив размера поля
 		else if (game_window == 0) {
