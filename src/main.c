@@ -196,7 +196,7 @@ int main(int argc, char **argv)
 				if (game_mode == 1) { game_mode = 0; }
 			
 				
-				if (count_of_clean==0) {
+				if (count_of_clean==99) {
 					main_algorithm(b, a, number_of_neighbors, size_of_matrix, &game_mode);
 					al_flip_display();
 				}
