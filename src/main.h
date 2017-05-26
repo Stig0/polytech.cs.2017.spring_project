@@ -4,15 +4,15 @@
 #ifndef MAIN_H
 #define MAIN_H
 #define SIZE 100
-const float FPS = 60;//const float FPS FPS
+#define FPS 60 //const float FPS FPS
 /** Ширина экрана*/
-const int SCREEN_W = 1000;
+#define SCREEN_W 1000
 /** Высота экрана*/
-const int SCREEN_H = 600;
+#define SCREEN_H 600
 /**Основная матрица*/
-int a[SIZE][SIZE];
+int main_matrix[SIZE][SIZE];
 /**Буферная матрица*/
-int b[SIZE][SIZE];
+int buffer_matrix[SIZE][SIZE];
 const int BOUNCER_SIZE = 32;
 int clear(int b[100][100]);//Очистка матрицы b
 /** Переменная ,отвечающая за размер матрицы*/

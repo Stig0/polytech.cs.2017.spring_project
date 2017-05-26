@@ -16,7 +16,7 @@
 */
 void size_matrix(int *size_of_matrix, float bouncer_x, float bouncer_y) {
 	assert(size_of_matrix!=NULL);
-	if ( (bouncer_y > 370 && bouncer_y < 405) && (bouncer_x > 640 && bouncer_x < 850)) {
+	if ( (bouncer_y > 375 && bouncer_y < 405) && (bouncer_x > 640 && bouncer_x < 850)) {
 		(*size_of_matrix )= 11;
 
 	}
@@ -31,4 +31,8 @@ void size_matrix(int *size_of_matrix, float bouncer_x, float bouncer_y) {
 	else if (  (bouncer_y > 465 && bouncer_y < 495) && (bouncer_x > 640 && bouncer_x < 850)) {
 		(*size_of_matrix) = 41;
 	}
+	else if (  (bouncer_y > 495 && bouncer_y < 525) && (bouncer_x > 640 && bouncer_x < 850)) {
+		(*size_of_matrix) = 99;
+	}
+	else{}
 }
