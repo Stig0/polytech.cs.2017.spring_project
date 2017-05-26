@@ -28,7 +28,11 @@ int main(int argc, char **argv)
 	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 	ALLEGRO_TIMER *timer = NULL;
 	ALLEGRO_BITMAP *bouncer = NULL;
-	ALLEGRO_BITMAP *image = NULL;
+	ALLEGRO_BITMAP *image1 = NULL;
+	ALLEGRO_BITMAP *image2 = NULL;
+	ALLEGRO_BITMAP *image3 = NULL;
+	ALLEGRO_BITMAP *image4 = NULL;
+	ALLEGRO_BITMAP *image5 = NULL;
 	if (!al_init()) {
 		fprintf(stderr, "failed to initialize allegro!\n");
 		return -1;
@@ -42,7 +46,7 @@ int main(int argc, char **argv)
 		fprintf(stderr, "failed to initialize the mouse!\n");
 		return -1;
 	}
-	timer = al_create_timer(2.0 / FPS);
+	timer = al_create_timer(0.1 / FPS);
 	if (!timer) {
 		fprintf(stderr, "failed to create timer!\n");
 		return -1;
@@ -60,14 +64,18 @@ int main(int argc, char **argv)
 		al_destroy_timer(timer);
 		return -1;
 	}
-	image = al_load_bitmap("res/fon_menu.jpg");
-	if (!image) {
+	image1 = al_load_bitmap("res/fon_menu.jpg");
+	image2 = al_load_bitmap("res/menu_op.jpg");
+	image3= al_load_bitmap("res/play_fon.jpg");
+	image4 = al_load_bitmap("res/menu_op.jpg");
+	image5 = al_load_bitmap("res/fon_menu.jpg");
+	if (!image1) {
 		al_show_native_message_box(display, "Error", "Error", "Failed to load image!",
 			NULL, ALLEGRO_MESSAGEBOX_ERROR);
 		al_destroy_display(display);
 		return 0;
 	}
-	al_draw_bitmap(image, 0, 0, 0);
+	al_draw_bitmap(image1, 0, 0, 0);
 	al_set_target_bitmap(bouncer);
 	al_clear_to_color(al_map_rgb(255, 0, 255));
 	al_set_target_bitmap(al_get_backbuffer(display));
@@ -91,29 +99,26 @@ int main(int argc, char **argv)
 	al_flip_display();
 	al_start_timer(timer);
 	int x = 0, y = 0;//Переменные для циклов FOR
-					 //Две основные матрицы игры (их назначение описано в плане реализации проекта )
+	int i = 0, m = 0;			 //Две основные матрицы игры (их назначение описано в плане реализации проекта )
 	int number_of_neighbors = 0;//Счетчик количества соседей у каждой живой клетки
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	clear(b);
 	while (Game_on == 1)
 	{
 		count_of_clean++; //Процесс очистки экрана,
-		if (count_of_clean == 100|| count_of_clean == 25) {
+		if (count_of_clean == 200) {
 			al_clear_to_color(al_map_rgb(0, 0, 0));//при котором все ненужные элементы удаляются ,
 			count_of_clean = 0; // а нужные прорисовываются снова
 			if (game_window == 0) { //Прорисовка стартового окна
-				image = al_load_bitmap("res/fon_menu.jpg"); //Загрузка фона для стартового окна
-				al_draw_bitmap(image, 0, 0, 0); //Прорисовка фона для стартового окна
+				
+				al_draw_bitmap(image1, 0, 0, 0); //Прорисовка фона для стартового окна
 				if (size_settings == 1)
 				{
-					image = al_load_bitmap("res/menu_op.jpg"); //Загрузка фона для стартового окна
-					al_draw_bitmap(image, 0, 0, 0); //Прорисовка фона для стартового окна
+					al_draw_bitmap(image2, 0, 0, 0); //Прорисовка фона для стартового окна
 				}
-				else { continue; }
 			}
 			else if (game_window == 1) { //Начало прорисовки интерфейса игрового процесса
-				image = al_load_bitmap("res/play_fon.jpg"); //Загрузка фона
-				al_draw_bitmap(image, 0, 0, 0); //Прорисовка фона
+				al_draw_bitmap(image3, 0, 0, 0); //Прорисовка фона
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 10, 500, 0, "Random");
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 150, 500, 0, "Planer");
 				al_draw_text(font_goldana, al_map_rgb(255, 0, 0), 290, 500, 0, "Rellay");
@@ -122,6 +127,7 @@ int main(int argc, char **argv)
 				al_draw_rectangle(145, 500, 260, 545, al_map_rgb(255, 0, 0), 0);
 				al_draw_rectangle(285, 500, 395, 545, al_map_rgb(255, 0, 0), 0);
 				al_draw_rectangle(425, 500, 580, 545, al_map_rgb(255, 0, 0), 0);
+
 				for (y = 1; y < size_of_matrix; y++) {
 
 					for (x = 1; x < size_of_matrix; x++)
@@ -136,7 +142,6 @@ int main(int argc, char **argv)
 					}
 				}
 			}
-			else { continue; }
 		}
 		//Конец процесса прорисовки
 		/*Далее программа обрабатывает входяшие команды от пользователя
@@ -144,8 +149,7 @@ int main(int argc, char **argv)
 		*/
 		ALLEGRO_EVENT ev;//Инициализация события
 		al_wait_for_event(event_queue, &ev);
-		bouncer_x = ev.mouse.x;
-		bouncer_y = ev.mouse.y;
+		
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) { //Случай закрытия пользователем дисплея
 			break;
 		}
@@ -168,28 +172,20 @@ int main(int argc, char **argv)
 					al_clear_to_color(al_map_rgb(0, 0, 0));
 					if (size_settings == 0) {
 						size_settings = 1;
-						image = al_load_bitmap("res/menu_op.jpg");
-						al_draw_bitmap(image, 0, 0, 0);
+						
+						al_draw_bitmap(image4, 0, 0, 0);
 					}
 					else if (size_settings == 1) {
 						size_settings = 0;
-						image = al_load_bitmap("res/fon_menu.jpg");
-						al_draw_bitmap(image, 0, 0, 0);
+						al_draw_bitmap(image5, 0, 0, 0);
 					}
 					else {}
 				}
 
 			}
 		}
-		else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES || //Получение координат мыши от пользователя
-			ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY) { //Координаты будут получены если мышь находится в игровом поле
 		
-			al_flush_event_queue(event_queue);
-		}
-
 		if (game_window == 1) {
-			//Прорисовка игровых ячеек
-			
 			//Остановка игрового цикла
 			 if (game_mode == 3)
 			{
@@ -198,22 +194,15 @@ int main(int argc, char **argv)
 			else if (game_mode == 10 || game_mode == 1)
 			{
 				if (game_mode == 1) { game_mode = 0; }
-				int i = 0, m = 0;
-				for (i = 1; i < 10; ++i) {
-					if ((count_of_clean == 10 * i) || (count_of_clean == 99)) { m = 1; }
-					
-
-				}
-				if (m == 1) {
-				//Прорисовка игровых ячеек
+			
 				
-				//Выполнение главного алгоритма игры
-				
-				
+				if (count_of_clean==0) {
 					main_algorithm(b, a, number_of_neighbors, size_of_matrix, &game_mode);
+					al_flip_display();
 				}
 
 			}
+			else{}
 
 		}
 		//Следующая часть кода отвечает за красные и зеленые ячейки напротив размера поля
