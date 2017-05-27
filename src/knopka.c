@@ -1,13 +1,14 @@
 #include "knopka.h"
 #include "lib.h"
 #include "functions.h"
+#define SIZE 100
 /** @file knopka.c
  *  @brief Файл содержит различные функцию обработки координат мыши
  *
  *
 	*@author Nikolaev Denis - den11nik@yandex.ru \n
 	*@author Puzko Danila - danilapuzko@mail.ru*/
-	/** \fn void knopka(int size_of_matrix, int *Game_on, int *size_settings,int *game_mode, int *game_window, int *count_of_clean, int b[100][100], float bouncer_x, float bouncer_y)
+	/** \fn void knopka(int size_of_matrix, int *Game_on, int *size_settings,int *game_mode, int *game_window, int *count_of_clean, int b[SIZE][SIZE], float bouncer_x, float bouncer_y)
 	##Функция обрабатывает координаты нажатия мыши
 	##Обработка при нажатии на кнопки
 			####Действие,при нажатии на кнопку Start:
@@ -23,7 +24,7 @@
 			определенным условиям(пользователь попадает в игровую ячейку,связанную с матрицей b) ТО: \n
 			если элемент b был равен 0 ,то он становится равным 1 \n
 			если элемент b был равен 1 ,то он становится равным 0 \n
-	  \param int b[100][100] буферная матрица
+	  \param int b[SIZE][SIZE] буферная матрица
 		\param int *count_of_clean  -указатель на счетчик очистки
 		\param int *Game_on -указатель на активность цикла
 		\param int *size_settings -указатель на рефим меню настроек
@@ -35,7 +36,7 @@
 		\return это void-функция
 	*/
 
-void knopka(int size_of_matrix, int *Game_on, int *size_settings, int *game_mode, int *game_window, int *count_of_clean, int b[100][100], float bouncer_x, float bouncer_y)
+void knopka(int size_of_matrix, int *Game_on, int *size_settings, int *game_mode, int *game_window, int *count_of_clean, int b[SIZE][SIZE], float bouncer_x, float bouncer_y)
 {
 	assert(game_mode != NULL);
 	assert(game_window != NULL);

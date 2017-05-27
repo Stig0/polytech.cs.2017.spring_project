@@ -5,12 +5,13 @@
 	*@author Nikolaev Denis - den11nik@yandex.ru \n
 	*@author Puzko Danila - danilapuzko@mail.ru*/
 #include "clean.h"
-	/** \fn int clear(int b[100][100])
+	/** \fn int clear(int b[SIZE][SIZE])
 	Функция присваивает всем элементам матрицы b значения 0,чтобы очистить игровое поле
-		\param int b[100][100] -буферная матрица
+		\param int b[SIZE][SIZE] -буферная матрица
 		\return Обнуленную буферную матрицу
 	*/
-int clear(int b[100][100]) {
+#define SIZE 100
+int clear(int b[SIZE][SIZE]) {
 	int i, j = 0;
 	int size_of_matrix = 100;
 	for (j = 0; j < size_of_matrix; j++) {
@@ -18,5 +19,5 @@ int clear(int b[100][100]) {
 			b[i][j] = 0;
 		}
 	}
-	return b[100][100];
+	return b[SIZE][SIZE];
 }

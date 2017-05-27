@@ -6,8 +6,9 @@
 	*@author Puzko Danila - danilapuzko@mail.ru*/
 #include "lib.h"
 #include "functions.h"
-int clear(int b[100][100]);
-/** \fn void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, int size_of_matrix,int *game_mode)
+#define SIZE 100
+int clear(int b[SIZE][SIZE]);
+/** \fn void main_algorithm(int b[SIZE][SIZE], int a[100][100], int number_of_neighbors, int size_of_matrix,int *game_mode)
 Поле представляет собой матрицу(массив) ,где каждая ячейка имеет свой номер.
 Если клетка белая ,то значение соответствующего элемента массива 0,если черная ,то 1 .
 Процесс игры будет представлять цикл при котором программа сравнивает каждый элемент массива
@@ -18,14 +19,14 @@ int clear(int b[100][100]);
 и массив 2 с данными после первого шага , экран связан с массивом 2  .
 После этого элементы массива 1 заменят на элементы  массива 2
 Цикл будет повторяться при включенной кнопке «Старт»;
-	\param int b[100][100] -буферная матрица
+	\param int b[SIZE][SIZE] -буферная матрица
 	\param int a[100][100] -основная матрица
 	\param int number_of_neighbors -число соседей
 	\param int size_of_matrix -размер матрицы
 	\param int *game_mode -указатель на игровой режим
 	\return это void-функция
 */
-void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, int size_of_matrix, int *game_mode) {
+void main_algorithm(int b[SIZE][SIZE], int a[100][100], int number_of_neighbors, int size_of_matrix, int *game_mode) {
 	int  i = 0, j = 0, x = 0, y = 0;
 	assert(game_mode!=NULL);
 	for (j = 1; j < size_of_matrix; j++) {
@@ -79,13 +80,13 @@ void main_algorithm(int b[100][100], int a[100][100], int number_of_neighbors, i
 		}
 	}
 }
-/** \fn planer(int b[100][100])
+/** \fn planer(int b[SIZE][SIZE])
 Функция присваивающая определенные значения матрице b для отрисовки фигуры planer
-  \param int b[100][100] буферная матрица
+  \param int b[SIZE][SIZE] буферная матрица
    \return  буферную матрицу с определенными элементами
 
 */
-int planer(int b[100][100])
+int planer(int b[SIZE][SIZE])
 {
 	b[2][1] = 1;
 	b[3][2] = 1;
@@ -93,16 +94,16 @@ int planer(int b[100][100])
 	b[2][3] = 1;
 	b[3][3] = 1;
 
-	return b[100][100];
+	return b[SIZE][SIZE];
 }
-/** \fn random(int b[100][100], int size_of_matrix)
+/** \fn random(int b[SIZE][SIZE], int size_of_matrix)
 Функция присваивающая определенные значения матрице b для отрисовки фигуры planer
-\param int b[100][100] буферная матрица
+\param int b[SIZE][SIZE] буферная матрица
 \param int size_of_matrix размер матрицы
 \return  буферную матрицу со случайными элементами
 
 */
-int random(int b[100][100], int size_of_matrix)
+int random(int b[SIZE][SIZE], int size_of_matrix)
 {
 	int randon_number = 0, i = 0, j = 0;;
 	srand((unsigned)time(NULL));
@@ -112,18 +113,18 @@ int random(int b[100][100], int size_of_matrix)
 			b[i][j] = randon_number;
 		}
 	}
-	return b[100][100];
+	return b[SIZE][SIZE];
 }
-/** \fn int blue_or_white(int b[100][100],int size_of_matrix, float bouncer_x, float bouncer_y)
+/** \fn int blue_or_white(int b[SIZE][SIZE],int size_of_matrix, float bouncer_x, float bouncer_y)
 {
 Функция присваивающая определенные значения матрице b для отрисовки фигуры rellay
-\param int b[100][100] буферная матрица
+\param int b[SIZE][SIZE] буферная матрица
 \param int size_of_matrix размер матрицы
 \param float bouncer_x  -координаты по x
 \param float bouncer_y -координаты по y
 \return  буферную матрицу с определенными элементами
 */
-int blue_or_white(int b[100][100], int size_of_matrix, float bouncer_x, float bouncer_y)
+int blue_or_white(int b[SIZE][SIZE], int size_of_matrix, float bouncer_x, float bouncer_y)
 {
 	int x, y;
 	for (y = 1; y < size_of_matrix; y++) {
@@ -141,14 +142,14 @@ int blue_or_white(int b[100][100], int size_of_matrix, float bouncer_x, float bo
 				}
 			}
 	}
-	return b[100][100];
+	return b[SIZE][SIZE];
 }
-/** \fn int rellay(int b[100][100])
+/** \fn int rellay(int b[SIZE][SIZE])
 Функция присваивающая определенные значения матрице b для отрисовки фигуры rellay
-  \param int b[100][100] буферная матрица
+  \param int b[SIZE][SIZE] буферная матрица
   \return  буферную матрицу с определенными элементами
 */
-int rellay(int b[100][100])
+int rellay(int b[SIZE][SIZE])
 {
 	b[5][9] = 1;
 	b[6][9] = 1;
@@ -193,15 +194,15 @@ int rellay(int b[100][100])
 	b[12][12] = 1;
 	b[13][13] = 1;
 
-	return b[100][100];
+	return b[SIZE][SIZE];
 }
 
-/** \fn int Twin_Bees(int b[100][100])
+/** \fn int Twin_Bees(int b[SIZE][SIZE])
 Функция присваивающая определенные значения матрице b для отрисовки фигуры Twin_Bees
-  \param int b[100][100] буферная матрица
+  \param int b[SIZE][SIZE] буферная матрица
    \return  буферную матрицу с определенными элементами
 */
-int Twin_Bees(int b[100][100])
+int Twin_Bees(int b[SIZE][SIZE])
 {
 	b[7][12] = 1;
 	b[8][12] = 1;
@@ -251,5 +252,5 @@ int Twin_Bees(int b[100][100])
 	b[35][12] = 1;
 	b[34][13] = 1;
 	b[35][13] = 1;
-	return b[100][100];
+	return b[SIZE][SIZE];
 }
