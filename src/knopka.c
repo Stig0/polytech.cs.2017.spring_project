@@ -64,11 +64,11 @@ void knopka(int size_of_matrix, int *Game_on, int *size_settings, int *game_mode
 			clear(b);
 			planer(b);
 		}
-		else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 290 && bouncer_x < 380)) {
+		else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 290 && bouncer_x < 380)&&(size_of_matrix>20)) {
 			clear(b);
 			rellay(b);
 		}
-		else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 430 && bouncer_x < 570)) {
+		else if ((bouncer_y > 500 && bouncer_y < 550) && (bouncer_x > 430 && bouncer_x < 570)&&(size_of_matrix>30)) {
 			clear(b);
 			Twin_Bees(b);
 		}
