@@ -6,7 +6,7 @@
 #include "functions.h"
 #include "unity.h"
 #include "unity_fixture.h"
-
+#define SIZE 100
 TEST_GROUP(TestPlayObject);
 
 TEST_GROUP_RUNNER(TestPlayObject)
@@ -31,7 +31,7 @@ TEST_TEAR_DOWN(TestPlayObject)
 */
 TEST(TestPlayObject, TestPlaner)
 {
-	int  b[100][100], c[100][100];
+	int  b[SIZE][SIZE], c[SIZE][SIZE];
 	int i, j = 0;
 	int size_of_matrix = 100;
 	for (j = 0; j < size_of_matrix; j++) {
@@ -54,7 +54,7 @@ TEST(TestPlayObject, TestPlaner)
 */
 TEST(TestPlayObject, TestRellay)
 {
-	int  b[100][100], c[100][100];
+	int  b[SIZE][SIZE], c[SIZE][SIZE];
 	int i, j = 0;
 	int size_of_matrix = 100;
 	for (j = 0; j < size_of_matrix; j++) {
@@ -114,7 +114,7 @@ TEST(TestPlayObject, TestRellay)
 */
 TEST(TestPlayObject, TestTwinBees)
 {
-	int  b[100][100], c[100][100];
+	int  b[SIZE][SIZE], c[SIZE][SIZE];
 	int i, j = 0;
 	int size_of_matrix = 100;
 	for (j = 0; j < size_of_matrix; j++) {

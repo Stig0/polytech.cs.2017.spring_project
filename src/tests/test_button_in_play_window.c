@@ -10,6 +10,7 @@
 #include "functions.h"
 #include "lib.h"
 #include "clean.h"
+#define SIZE 100
 TEST_GROUP(TestButtonInPlayWindow);
 
 TEST_GROUP_RUNNER(TestButtonInPlayWindow)
@@ -34,7 +35,7 @@ TEST_TEAR_DOWN(TestButtonInPlayWindow)
 */
 TEST(TestButtonInPlayWindow, buttonstart)
 {
-	int b[100][100];
+	int b[SIZE][SIZE];
 	int size_of_matrix=40, Game_on=0, size_settings=0, game_mode=0, game_window=1, count_of_clean=0;
 	float  bouncer_x=0.0, bouncer_y=0.0;
 	//Test button start
@@ -49,7 +50,7 @@ TEST(TestButtonInPlayWindow, buttonstart)
 */
 TEST(TestButtonInPlayWindow, buttonstep)
 {
-	int b[100][100];
+	int b[SIZE][SIZE];
 	int size_of_matrix=40, Game_on=0, size_settings=0, game_mode=0, game_window=1, count_of_clean=0;
 	float  bouncer_x=0.0, bouncer_y=0.0;
 	//Test button step
@@ -64,7 +65,7 @@ TEST(TestButtonInPlayWindow, buttonstep)
 */
 TEST(TestButtonInPlayWindow, buttonstop)
 {
-	int b[100][100];
+	int b[SIZE][SIZE];
 	int size_of_matrix=40, Game_on=0, size_settings=0, game_mode=0, game_window=1, count_of_clean=0;
 	float  bouncer_x=0.0, bouncer_y=0.0;
 	//Test button stop
@@ -79,7 +80,7 @@ TEST(TestButtonInPlayWindow, buttonstop)
 */
 TEST(TestButtonInPlayWindow, buttonclean)
 {
-	int a[100][100], b[100][100];
+	int a[SIZE][SIZE], b[SIZE][SIZE];
 	int i=0, j=0;
 	int size_of_matrix=40, Game_on=0, size_settings=0, game_mode=0, game_window=1, count_of_clean=0;
 	float  bouncer_x=0.0, bouncer_y=0.0;
@@ -100,7 +101,7 @@ TEST(TestButtonInPlayWindow, buttonclean)
 */
 TEST(TestButtonInPlayWindow, buttonmenu)
 {
-	int b[100][100];
+	int b[SIZE][SIZE];
 	int size_of_matrix=40, Game_on=0, size_settings=0, game_mode=0, game_window=1, count_of_clean=0;
 	float  bouncer_x=0.0, bouncer_y=0.0;
 	//Test button menu

@@ -6,6 +6,7 @@
 #include "functions.h"
 #include "unity.h"
 #include "unity_fixture.h"
+#define SIZE 100
 
 TEST_GROUP(TestMainAlgorithm);
 
@@ -29,7 +30,7 @@ TEST_TEAR_DOWN(TestMainAlgorithm)
 */
 TEST(TestMainAlgorithm, mainalgorithm1)
 {
-	int a[100][100], b[100][100], c[100][100];
+	int a[SIZE][SIZE], b[SIZE][SIZE], c[SIZE][SIZE];
 	int i, j = 0, number=0, game_mode=1;
 	int size_of_matrix = 100;
 	for (j = 0; j < size_of_matrix; j++) {
@@ -55,7 +56,7 @@ TEST(TestMainAlgorithm, mainalgorithm1)
 */
 TEST(TestMainAlgorithm, mainalgorithm2)
 {
-	int a[100][100], b[100][100], c[100][100];
+	int a[SIZE][SIZE], b[SIZE][SIZE], c[SIZE][SIZE];
 	int i, j = 0, number=0, game_mode=1;
 	int size_of_matrix = 100;
 	for (j = 0; j < size_of_matrix; j++) {
@@ -80,7 +81,7 @@ TEST(TestMainAlgorithm, mainalgorithm2)
 */
 TEST(TestMainAlgorithm, mainalgorithm3)
 {
-	int a[100][100], b[100][100], c[100][100];
+	int a[SIZE][SIZE], b[SIZE][SIZE], c[SIZE][SIZE];
 	int i, j = 0, number=0, game_mode=1;
 	int size_of_matrix = 100;
 	for (j = 0; j < size_of_matrix; j++) {
