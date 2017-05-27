@@ -32,7 +32,7 @@ TEST_TEAR_DOWN(TestPlayObject)
 TEST(TestPlayObject, TestPlaner)
 {
 	int  b[100][100], c[100][100];
-	int i, j = 0, number=0, game_mode=1;
+	int i, j = 0;
 	int size_of_matrix = 100;
 	for (j = 0; j < size_of_matrix; j++) {
 		for (i = 0; i < size_of_matrix; i++) {
@@ -55,7 +55,7 @@ TEST(TestPlayObject, TestPlaner)
 TEST(TestPlayObject, TestRellay)
 {
 	int  b[100][100], c[100][100];
-	int i, j = 0, number=0, game_mode=1;
+	int i, j = 0;
 	int size_of_matrix = 100;
 	for (j = 0; j < size_of_matrix; j++) {
 		for (i = 0; i < size_of_matrix; i++) {
@@ -115,7 +115,7 @@ TEST(TestPlayObject, TestRellay)
 TEST(TestPlayObject, TestTwinBees)
 {
 	int  b[100][100], c[100][100];
-	int i, j = 0, number=0, game_mode=1;
+	int i, j = 0;
 	int size_of_matrix = 100;
 	for (j = 0; j < size_of_matrix; j++) {
 		for (i = 0; i < size_of_matrix; i++) {

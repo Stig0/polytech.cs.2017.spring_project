@@ -34,8 +34,7 @@ TEST_TEAR_DOWN(TestButtonInPlayWindow)
 */
 TEST(TestButtonInPlayWindow, buttonstart)
 {
-	int a[100][100], b[100][100];
-	int i=0, j=0;
+	int b[100][100];
 	int size_of_matrix=40, Game_on=0, size_settings=0, game_mode=0, game_window=1, count_of_clean=0;
 	float  bouncer_x=0.0, bouncer_y=0.0;
 	//Test button start
@@ -50,8 +49,7 @@ TEST(TestButtonInPlayWindow, buttonstart)
 */
 TEST(TestButtonInPlayWindow, buttonstep)
 {
-	int a[100][100], b[100][100];
-	int i=0, j=0;
+	int b[100][100];
 	int size_of_matrix=40, Game_on=0, size_settings=0, game_mode=0, game_window=1, count_of_clean=0;
 	float  bouncer_x=0.0, bouncer_y=0.0;
 	//Test button step
@@ -66,8 +64,7 @@ TEST(TestButtonInPlayWindow, buttonstep)
 */
 TEST(TestButtonInPlayWindow, buttonstop)
 {
-	int a[100][100], b[100][100];
-	int i=0, j=0;
+	int b[100][100];
 	int size_of_matrix=40, Game_on=0, size_settings=0, game_mode=0, game_window=1, count_of_clean=0;
 	float  bouncer_x=0.0, bouncer_y=0.0;
 	//Test button stop
@@ -103,8 +100,7 @@ TEST(TestButtonInPlayWindow, buttonclean)
 */
 TEST(TestButtonInPlayWindow, buttonmenu)
 {
-	int a[100][100], b[100][100];
-	int i=0, j=0;
+	int b[100][100];
 	int size_of_matrix=40, Game_on=0, size_settings=0, game_mode=0, game_window=1, count_of_clean=0;
 	float  bouncer_x=0.0, bouncer_y=0.0;
 	//Test button menu

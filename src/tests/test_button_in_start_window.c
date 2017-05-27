@@ -30,8 +30,7 @@ TEST_TEAR_DOWN(TestButtonInStartWindow)
 */
 TEST(TestButtonInStartWindow, buttonplay)
 {
-	int a[100][100], b[100][100];
-	int i=0, j=0;
+	int b[100][100];
 	int size_of_matrix=40, Game_on=1, size_settings=0, game_mode=0, game_window=0, count_of_clean=0;
 	float  bouncer_x=0.0, bouncer_y=0.0;
 	bouncer_x = 411.0;
@@ -47,8 +46,7 @@ TEST(TestButtonInStartWindow, buttonplay)
 */
 TEST(TestButtonInStartWindow, buttonexit)
 {
-	int a[100][100], b[100][100];
-	int i=0, j=0;
+	int b[100][100];
 	int size_of_matrix=40, Game_on=1, size_settings=0, game_mode=0, game_window=0, count_of_clean=0;
 	float  bouncer_x=0.0, bouncer_y=0.0;
 	bouncer_x = 549.0;
