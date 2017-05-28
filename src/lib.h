@@ -1,6 +1,6 @@
 /** @file lib.h
-	*@author Nikolaev Denis - den11nik@yandex.ru \n
-	*@author Puzko Danila - danilapuzko@mail.ru*/
+    *@author Nikolaev Denis - den11nik@yandex.ru \n
+    *@author Puzko Danila - danilapuzko@mail.ru*/
 #ifndef LIB_H
 #define LIB_H
 #include <stdio.h>
