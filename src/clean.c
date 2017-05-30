@@ -12,7 +12,7 @@
     */
 #define SIZE 100
 int clear(int b[SIZE][SIZE]) {
-    int i, j = 0;
+    int i=0, j = 0;
     int size_of_matrix = 100;
     for (j = 0; j < size_of_matrix; j++) {
         for (i = 0; i < size_of_matrix; i++) {
