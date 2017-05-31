@@ -30,6 +30,7 @@ int main(int argc, char **argv)
     ALLEGRO_BITMAP *bouncer = NULL;
     ALLEGRO_BITMAP *image1 = NULL;
     ALLEGRO_BITMAP *image3 = NULL;
+    assert(argv!=NULL);
     if (!al_init()) {
         fprintf(stderr, "failed to initialize allegro!\n");
         return -1;
