@@ -27,15 +27,15 @@ TEST_TEAR_DOWN(TestSizeMatrix)
 */
 TEST(TestSizeMatrix, sizematrix)
 {
-	int size_of_matrix=0;
-	size_matrix(&size_of_matrix, 849, 434);
-	TEST_ASSERT_EQUAL_INT( 21, size_of_matrix );
-	size_matrix(&size_of_matrix, 710, 380);
-	TEST_ASSERT_EQUAL_INT( 11, size_of_matrix );
-	size_matrix(&size_of_matrix, 641, 436);
-	TEST_ASSERT_EQUAL_INT( 31, size_of_matrix );
-	size_matrix(&size_of_matrix, 700, 470);
-	TEST_ASSERT_EQUAL_INT( 41, size_of_matrix );
+    int size_of_matrix = 0;
+    size_matrix(&size_of_matrix, 849, 434);
+    TEST_ASSERT_EQUAL_INT(21, size_of_matrix);
+    size_matrix(&size_of_matrix, 710, 380);
+    TEST_ASSERT_EQUAL_INT(11, size_of_matrix);
+    size_matrix(&size_of_matrix, 641, 436);
+    TEST_ASSERT_EQUAL_INT(31, size_of_matrix);
+    size_matrix(&size_of_matrix, 700, 470);
+    TEST_ASSERT_EQUAL_INT(41, size_of_matrix);
 }
 
 

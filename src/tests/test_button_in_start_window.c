@@ -32,15 +32,15 @@ TEST_TEAR_DOWN(TestButtonInStartWindow)
 */
 TEST(TestButtonInStartWindow, buttonplay)
 {
-	int b[SIZE][SIZE];
-	int size_of_matrix=40, Game_on=1, size_settings=0, game_mode=0, game_window=0, count_of_clean=0;
-	float  bouncer_x=0.0, bouncer_y=0.0;
-	bouncer_x = 411.0;
-	bouncer_y = 351.0;
-	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean,b, bouncer_x, bouncer_y);
-	TEST_ASSERT_EQUAL_INT(1, game_window);
-	TEST_ASSERT_EQUAL_INT(0, size_settings);
-	TEST_ASSERT_EQUAL_INT(99, count_of_clean);
+    int b[SIZE][SIZE];
+    int size_of_matrix = 40, Game_on = 1, size_settings = 0, game_mode = 0, game_window = 0, count_of_clean = 0;
+    float  bouncer_x = 0.0, bouncer_y = 0.0;
+    bouncer_x = 411.0;
+    bouncer_y = 351.0;
+    knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
+    TEST_ASSERT_EQUAL_INT(1, game_window);
+    TEST_ASSERT_EQUAL_INT(0, size_settings);
+    TEST_ASSERT_EQUAL_INT(99, count_of_clean);
 }
 /** \fn TEST(TestButtonInStartWindow, buttonexit)
 Тестирование кнопки Выход в режиме стартового окна .
@@ -48,13 +48,13 @@ TEST(TestButtonInStartWindow, buttonplay)
 */
 TEST(TestButtonInStartWindow, buttonexit)
 {
-	int b[SIZE][SIZE];
-	int size_of_matrix=40, Game_on=1, size_settings=0, game_mode=0, game_window=0, count_of_clean=0;
-	float  bouncer_x=0.0, bouncer_y=0.0;
-	bouncer_x = 549.0;
-	bouncer_y = 479.0;
-	knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean,b, bouncer_x, bouncer_y);
-	TEST_ASSERT_EQUAL_INT(0, Game_on);
+    int b[SIZE][SIZE];
+    int size_of_matrix = 40, Game_on = 1, size_settings = 0, game_mode = 0, game_window = 0, count_of_clean = 0;
+    float  bouncer_x = 0.0, bouncer_y = 0.0;
+    bouncer_x = 549.0;
+    bouncer_y = 479.0;
+    knopka(size_of_matrix, &Game_on, &size_settings, &game_mode, &game_window, &count_of_clean, b, bouncer_x, bouncer_y);
+    TEST_ASSERT_EQUAL_INT(0, Game_on);
 
 }
 
